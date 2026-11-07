@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Let's Go English !</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#ff6f59">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Let's Go English">
+<style>
+:root{--bg:#fff7ee;--card:#fff;--ink:#2b2a4c;--mut:#7a7699;--coral:#ff6f59;--sun:#ffb703;--teal:#2ec4b6;--vio:#7c5cff;--ok:#2bb673;--ko:#ef476f;--line:#f1e4d6;--sh:0 8px 24px rgba(120,80,40,.13)}
+@media(prefers-color-scheme:dark){:root{--bg:#1e1a2e;--card:#2a2540;--ink:#fdf3e7;--mut:#b4aed0;--line:#3b3558;--sh:0 8px 24px rgba(0,0,0,.35)}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:ui-rounded,"Nunito","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:9;display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px)}
+#back{border:0;background:var(--card);color:var(--ink);width:42px;height:42px;border-radius:50%;font-size:1.5rem;box-shadow:var(--sh);cursor:pointer;visibility:hidden;flex:none}
+#logo{flex:1;margin:0;text-align:center;font-size:clamp(1.25rem,5.5vw,1.8rem);font-weight:900;white-space:nowrap;cursor:pointer;background:linear-gradient(90deg,var(--coral),var(--vio));-webkit-background-clip:text;background-clip:text;color:transparent}
+#score{background:var(--sun);color:#3b2a00;font-weight:900;padding:8px 13px;border-radius:99px;box-shadow:var(--sh);flex:none}
+main{max-width:640px;margin:0 auto;padding:6px 16px}
+h2{margin:20px 0 10px;font-size:1.25rem}
+.hero-card{background:linear-gradient(135deg,var(--coral),#ff9a5a);color:#fff;border-radius:28px;padding:20px;box-shadow:var(--sh);display:flex;gap:16px;align-items:center;margin:8px 0 6px}
+.hero-card h3{margin:0;font-size:1.25rem}.hero-card p{margin:2px 0 0;opacity:.95}
+.btn{border:0;border-radius:18px;padding:15px 20px;font:inherit;font-weight:800;cursor:pointer;background:var(--card);color:var(--ink);box-shadow:var(--sh);transition:transform .12s}
+.btn:active{transform:scale(.97)}
+.main{background:var(--coral);color:#fff;width:100%;margin-top:12px;font-size:1.05rem}
+.alt{background:var(--vio)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lv{color:#fff;text-align:left;padding:22px 16px;border-radius:26px;background:linear-gradient(135deg,var(--c),var(--c2));font-size:1.7rem;font-weight:900}
+.lv small{display:block;font-size:.85rem;font-weight:700;opacity:.92;margin-top:4px}
+.axe{display:flex;align-items:center;gap:14px;width:100%;text-align:left;margin-bottom:12px;padding:12px 16px}
+.axe .t{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;flex:none}
+.axe b{display:block}.axe small{color:var(--mut);font-weight:700}
+.card{background:var(--card);border-radius:24px;padding:18px;margin:12px 0;box-shadow:var(--sh)}
+.card h3{margin:0 0 8px}.card p{margin:8px 0}
+.lesson{border-top:6px solid var(--teal)}
+.retain{border-top:6px solid var(--sun);background:color-mix(in srgb,var(--sun) 14%,var(--card))}
+.retain li{list-style:none;margin:8px 0;padding-left:30px;position:relative}
+.retain li::before{content:"✔";position:absolute;left:0;color:var(--ok);font-weight:900}
+.seg{display:flex;background:var(--line);border-radius:18px;padding:4px;margin:10px 0}
+.seg button{flex:1;border:0;background:none;padding:11px;border-radius:14px;font:inherit;font-weight:800;color:var(--mut);cursor:pointer}
+.seg button.on{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
+.tr{color:var(--mut);font-size:.92rem;margin:4px 0 8px}
+.q{font-size:1.1rem}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:15px;border-radius:16px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 20%,var(--card))}
+.opt.ko{border-color:var(--ko);background:color-mix(in srgb,var(--ko) 20%,var(--card))}
+input[type=text]{font:inherit;padding:14px;border-radius:16px;border:2px solid var(--line);width:100%;margin:8px 0;background:var(--card);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;min-height:48px;padding:6px;border-radius:16px}
+.zone{border:2px dashed var(--line)}
+.chip{background:var(--vio);color:#fff;padding:10px 15px;border-radius:99px;border:0;font:inherit;font-weight:700;cursor:pointer}
+.msg{font-weight:800;margin-top:10px}.msg.ok{color:var(--ok)}.msg.ko{color:var(--ko)}
+.say{background:none;border:0;font:inherit;color:var(--vio);font-weight:800;cursor:pointer;padding:6px 0}
+.bar{height:12px;background:var(--line);border-radius:9px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),var(--coral));border-radius:9px;transition:width .4s}
+.big{text-align:center}.big .em{font-size:3.6rem}
+.gift{background:color-mix(in srgb,var(--sun) 25%,var(--card));border-radius:16px;padding:10px;margin:10px 0;font-weight:800}
+/* Avatar */
+.av{position:relative;width:1.6em;height:1.6em;display:inline-grid;place-items:center;border-radius:50%;flex:none}
+.av .b{font-size:1em;line-height:1}.av img.b{width:1.3em;height:1.3em;object-fit:contain}
+.av .hat{position:absolute;top:-.3em;left:50%;transform:translateX(-50%);font-size:.55em;line-height:1}
+.av .fc{position:absolute;top:.52em;left:50%;transform:translateX(-50%);font-size:.42em;line-height:1}
+.av .hd{position:absolute;right:-.25em;bottom:.05em;font-size:.55em;line-height:1}
+.av .pt{position:absolute;left:-.3em;bottom:0;font-size:.55em;line-height:1}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:10px}
+.it{border:2px solid var(--line);background:var(--card);border-radius:16px;padding:10px 4px;font-size:1.8rem;text-align:center;cursor:pointer;color:var(--ink);font-family:inherit}
+.it small{display:block;font-size:.68rem;font-weight:700;color:var(--mut);line-height:1.1;margin-top:4px}
+.it.on{border-color:var(--coral);background:color-mix(in srgb,var(--coral) 14%,var(--card))}
+.it.lock{opacity:.5;cursor:default;filter:grayscale(1)}
+.it i{display:block;width:32px;height:32px;border-radius:50%;margin:0 auto;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+/* Route */
+.road{display:flex;flex-direction:column-reverse;position:relative;padding:14px 0;margin:10px 0}
+.road::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:18px;margin-left:-9px;border-radius:9px;background:repeating-linear-gradient(180deg,#fff9 0 10px,transparent 10px 24px),#d9c3a8}
+.stop{display:grid;grid-template-columns:1fr 84px 1fr;align-items:center;margin:16px 0;position:relative}
+.nw{grid-column:2;grid-row:1;display:flex;justify-content:center;position:relative}
+.node{width:70px;height:70px;border-radius:50%;border:5px solid #fff;font-size:1.9rem;background:#d9c3a8;box-shadow:var(--sh);cursor:pointer}
+.node.done{background:var(--sun)}
+.node.cur{background:var(--coral);animation:pulse 1.4s infinite}
+.node.lock{filter:grayscale(1);opacity:.55;cursor:not-allowed}
+.lab{padding:0 10px;font-weight:900}.lab small{display:block;color:var(--mut);font-weight:700}
+.stop.r .lab{grid-column:3;grid-row:1}.stop.l .lab{grid-column:1;grid-row:1;text-align:right}
+.hero{position:absolute;top:-56px;left:50%;margin-left:-29px;animation:bob 1s infinite;pointer-events:none;z-index:2}
+.hero.walk{animation:walk 1s ease-out,bob 1s 1s infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+@keyframes walk{from{transform:translateY(120px);opacity:0}to{transform:none;opacity:1}}
+@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(255,111,89,.25)}}
+/* Navigation basse + pied de page */
+#tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;gap:6px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--card) 94%,transparent);backdrop-filter:blur(12px);box-shadow:0 -6px 20px rgba(0,0,0,.08)}
+#tabs button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-size:1.5rem;display:flex;flex-direction:column;align-items:center;padding:5px;border-radius:16px;cursor:pointer;line-height:1.2}
+#tabs button span{font-size:.72rem;font-weight:800}
+#tabs button.on{color:var(--coral);background:color-mix(in srgb,var(--coral) 13%,transparent)}
+footer{max-width:640px;margin:18px auto 0;padding:0 16px;text-align:center;color:var(--mut);font-size:.8rem}
+footer a{color:var(--vio);font-weight:800;text-decoration:underline;cursor:pointer}
+</style>
+</head>
+<body>
+<header><button id="back" aria-label="Retour">‹</button><h1 id="logo">Let's Go English !</h1><div id="score">⭐ 0</div></header>
+<main id="app"></main>
+<footer>© 2026 HENRY Clément – Tous droits réservés.<br>Application propriété de HENRY Clément · <a id="lg">Mentions légales</a></footer>
+<nav id="tabs"><button data-t="home">🏠<span>Accueil</span></button><button data-t="journey">🗺️<span>Aventure</span></button><button data-t="hero">🎒<span>Mon héros</span></button></nav>
+<script>
+const LV=["6ème","5ème","4ème","3ème"],CO=[["#2ec4b6","#1a9e8f"],["#ffb703","#fb8500"],["#ff6f59","#e63f66"],["#7c5cff","#4f46e5"]];
+// Axe = [emoji, titre, leçon, à retenir (|), vocabulaire "en=fr;…", QCM [q,"a|b|c",index,traduction], trous [phrase,réponse(s),traduction], ordre [phrase,traduction]]
+const D=[[
+["🧑","Personnes et personnages","Pour <b>se présenter</b> ou décrire quelqu'un, on utilise <b>be</b> (être) et <b>have</b> (avoir).<br><b>I am</b> eleven. <i>(J'ai onze ans.)</i> — <b>He is</b> British. <i>(Il est britannique.)</i><br><b>She has</b> black hair. <i>(Elle a les cheveux noirs.)</i><br>À la 3e personne du singulier (he / she / it), have devient <b>has</b> et les autres verbes prennent un <b>-s</b> : he lives, she likes.<br>Pour dire « à qui c'est », on ajoute <b>'s</b> : Harry's wand <i>(la baguette d'Harry)</i>.","I am / you are / he-she-it is|I have / he-she-it has|3e personne : verbe + -s (he lives)|'s = possession (Harry's friend)|Se présenter : My name is… I'm… I live in…","mother=mère;father=père;brother=frère;sister=sœur;cousin=cousin(e);hair=cheveux;tall=grand;funny=drôle",[["Harry ___ black hair.","have|has|haves",1,"Harry a les cheveux noirs."],["She ___ eleven years old.","am|is|are",1,"Elle a onze ans."],["This is ___ book.","Tom|Tom's|Toms",1,"C'est le livre de Tom."]],[["My name ___ Colin.","is","Je m'appelle Colin."],["He ___ a sister. (have)","has","Il a une sœur."],["I ___ French. (être)","am","Je suis français."]],[["She has two brothers","Elle a deux frères."],["My cousin lives in London","Mon cousin habite à Londres."]]],
+["🏠","Le quotidien : vivre, jouer, apprendre","Pour parler de ta <b>journée</b> et de tes <b>habitudes</b>, on utilise le <b>présent simple</b>.<br>I get up at seven. <i>(Je me lève à sept heures.)</i><br>Avec he / she / it, on ajoute <b>-s</b> (ou <b>-es</b> après s, sh, ch, x, o) : he gets up, she watches TV, he goes to school.<br>Négation : <b>don't</b> / <b>doesn't</b> + verbe sans -s : He doesn't like fish.<br>Petits mots du temps : <b>at</b> + heure (at 8 am), <b>on</b> + jour (on Monday), <b>in</b> + moment (in the morning).","Présent simple = habitudes|he / she / it + verbe-s (goes, watches)|don't / doesn't + verbe de base|at 8 / on Monday / in the morning|half past seven = 7h30","to wake up=se réveiller;breakfast=petit-déjeuner;homework=devoirs;to go to bed=aller se coucher;school=école;lunch=déjeuner;weekend=week-end;morning=matin",[["I have English ___ Monday.","in|on|at",1,"J'ai anglais le lundi."],["He ___ to school by bus.","go|goes|going",1,"Il va à l'école en bus."],["She ___ like fish.","don't|doesn't|isn't",1,"Elle n'aime pas le poisson."]],[["He ___ up at seven. (get)","gets","Il se lève à sept heures."],["We have lunch ___ noon.","at","Nous déjeunons à midi."],["I do my homework ___ the evening.","in","Je fais mes devoirs le soir."]],[["We play football after school","Nous jouons au foot après l'école."],["She watches TV in the evening","Elle regarde la télé le soir."]]],
+["🌍","Pays et paysages","Pour décrire un lieu : <b>There is</b> (il y a, singulier) et <b>There are</b> (il y a, pluriel).<br>There <b>is</b> a river. <i>(Il y a une rivière.)</i> — There <b>are</b> two lions. <i>(Il y a deux lions.)</i><br>Négation : <b>isn't</b> / <b>aren't</b>. Question : <b>Is there</b> a lake ? <i>(Y a-t-il un lac ?)</i><br>Pour situer : <b>in</b> (dans), <b>on</b> (sur), <b>next to</b> (à côté de), <b>near</b> (près de).<br>L'adjectif se place <b>avant</b> le nom : a <b>big</b> forest.","There is + nom singulier|There are + nom pluriel|Question : Is there…? / Are there…?|Adjectif avant le nom : a big forest|in / on / next to / near","river=rivière, fleuve;mountain=montagne;forest=forêt;beach=plage;island=île;lion=lion;sea=mer;lake=lac",[["There ___ two lions in the park.","is|are|be",1,"Il y a deux lions dans le parc."],["___ there a lake near here?","Is|Are|Do",0,"Y a-t-il un lac près d'ici ?"],["The Highlands are ___ Scotland.","on|in|at",1,"Les Highlands sont en Écosse."]],[["There ___ a big forest.","is","Il y a une grande forêt."],["There ___ three islands.","are","Il y a trois îles."],["The lake is ___ to the forest. (à côté)","next","Le lac est à côté de la forêt."]],[["There is a river in the forest","Il y a une rivière dans la forêt."],["There are many animals in Kenya","Il y a beaucoup d'animaux au Kenya."]]],
+["🐉","Imaginaire, contes et légendes","Pour <b>raconter une histoire</b>, on utilise des mots qui mettent les événements dans l'ordre : <b>Once upon a time</b> <i>(Il était une fois)</i>, <b>first</b> <i>(d'abord)</i>, <b>then</b> <i>(ensuite)</i>, <b>finally</b> <i>(enfin)</i>.<br>On présente les personnages avec <b>be</b> : Finn McCool <b>is</b> a giant. He <b>lives</b> in Ireland.<br>On résume au présent : First he catches the salmon, then he cooks it.<br>Pour relier les idées : <b>and</b> (et), <b>but</b> (mais), <b>because</b> (parce que), <b>so</b> (donc).","Once upon a time = Il était une fois|first → then → finally|and / but / because / so|Décrire : He is a giant. He has…|On résume au présent","dragon=dragon;witch=sorcière;wizard=sorcier;giant=géant;castle=château;magic=magie;legend=légende;brave=courageux",[["Which words start a fairy tale?","Finally|Once upon a time|Because",1,"Quels mots commencent un conte ?"],["He is tired, ___ he goes to bed.","so|but|or",0,"Il est fatigué, donc il va se coucher."],["First he catches the fish, ___ he cooks it.","then|because|but",0,"D'abord il attrape le poisson, ensuite il le cuisine."]],[["Once upon a ___, there was a dragon.","time","Il était une fois un dragon."],["The giant ___ in a cave. (live)","lives","Le géant vit dans une grotte."],["I like the story ___ it is funny.","because","J'aime l'histoire parce qu'elle est drôle."]],[["Finn McCool is a giant","Finn McCool est un géant."],["First the witch makes a potion","D'abord la sorcière prépare une potion."]]],
+["🎨","Arts et expression des sentiments","Pour dire ce que tu <b>aimes</b> ou <b>n'aimes pas</b> : <b>I like</b> / <b>I love</b> / <b>I don't like</b> / <b>I hate</b> + nom ou verbe en <b>-ing</b>.<br>I love music. <i>(J'adore la musique.)</i> — I like <b>drawing</b>. <i>(J'aime dessiner.)</i><br>Pour décrire une œuvre : This painting is <b>beautiful / funny / strange / sad</b>.<br>Pour donner ton avis : <b>I think</b> it is… <i>(Je pense que c'est…)</i> My <b>favourite</b> singer is… <i>(Mon chanteur préféré est…)</i>","I like / love / hate + nom ou -ing|I don't like = je n'aime pas|favourite = préféré|It is beautiful / funny / strange|I think + phrase","painting=tableau, peinture;song=chanson;singer=chanteur/chanteuse;beautiful=beau, belle;strange=étrange;sad=triste;colour=couleur;favourite=préféré",[["Comment dire « je n'aime pas » ?","I like it|I don't like it|I'm like it",1,"Je n'aime pas ça."],["I love ___ to music.","listen|listening|listens",1,"J'adore écouter de la musique."],["This painting is very ___ .","sad|sadly|sadness",0,"Ce tableau est très triste."]],[["I ___ listening to music. (j'adore)","love|like","J'adore écouter de la musique."],["My ___ colour is blue.","favourite","Ma couleur préférée est le bleu."],["I ___ like spinach. (je n'aime pas)","don't","Je n'aime pas les épinards."]],[["My favourite singer is Adele","Ma chanteuse préférée est Adele."],["I think this painting is beautiful","Je pense que ce tableau est beau."]]]
+],[
+["🖼️","Portrait, autoportrait","Pour parler du <b>passé</b> et raconter la vie de quelqu'un, on utilise le <b>prétérit</b>.<br>Le verbe <b>be</b> devient <b>was</b> (I, he, she, it) ou <b>were</b> (you, we, they) : Lincoln <b>was</b> president. <i>(Lincoln était président.)</i><br><b>born</b> signifie « né(e) » : He <b>was born</b> in 1917. <i>(Il est né en 1917.)</i><br>Pour décrire un portrait : He has short hair, she wears glasses. Il paraît <b>proud</b> (fier), <b>serious</b> (sérieux).<br>Négation : wasn't / weren't.","was (I/he/she/it) – were (you/we/they)|was born in + année = est né en|wasn't / weren't = n'était pas|Décrire : short / long hair, glasses|in + année, on + date (on 4th July)","portrait=portrait;president=président;to be born=naître;proud=fier;serious=sérieux;family=famille;yearbook=album de promotion;writer=écrivain",[["Lincoln ___ born in Kentucky.","is|was|were",1,"Lincoln est né dans le Kentucky."],["We ___ in London yesterday.","was|were|are",1,"Nous étions à Londres hier."],["She ___ at home last night.","wasn't|weren't|isn't",0,"Elle n'était pas à la maison hier soir."]],[["He ___ president from 1960 to 1963. (be)","was","Il a été président de 1960 à 1963."],["They ___ in the same class. (be)","were","Ils étaient dans la même classe."],["She was born ___ 1990.","in","Elle est née en 1990."]],[["He was born in Kentucky","Il est né dans le Kentucky."],["They were very proud of the portrait","Ils étaient très fiers du portrait."]]],
+["🍂","Le quotidien : lieux, rythmes, saisons","Pour dire <b>à quelle fréquence</b> on fait quelque chose : <b>always</b> (toujours), <b>usually</b> (d'habitude), <b>often</b> (souvent), <b>sometimes</b> (parfois), <b>never</b> (jamais).<br>Ils se placent <b>avant le verbe</b> : She <b>never</b> goes to school by car. <i>(Elle ne va jamais à l'école en voiture.)</i><br>Mais <b>après be</b> : He is <b>always</b> late.<br>Saisons : <b>in</b> spring / summer / autumn / winter ; mois : <b>in</b> July ; dates : <b>on</b> 4th July.","always > usually > often > sometimes > never|Avant le verbe : I often eat…|Après be : He is always late|in + saison / mois|on + jour / date","always=toujours;sometimes=parfois;never=jamais;spring=printemps;summer=été;autumn=automne;winter=hiver;weather=météo",[["Quelle phrase est correcte ?","She goes never to school|She never goes to school|Never she goes to school",1,"Elle ne va jamais à l'école."],["He is ___ late.","always|alway|all ways",0,"Il est toujours en retard."],["We go skiing ___ winter.","on|in|at",1,"Nous allons skier en hiver."]],[["It is very cold ___ winter.","in","Il fait très froid en hiver."],["I ___ eat breakfast at seven. (toujours)","always","Je prends toujours mon petit-déjeuner à sept heures."],["They ___ go to the cinema. (parfois)","sometimes","Ils vont parfois au cinéma."]],[["We always eat dinner together","Nous dînons toujours ensemble."],["It never snows in July","Il ne neige jamais en juillet."]]],
+["🧙","Le réel et l'imaginaire","Pour <b>raconter au passé</b>, on emploie le <b>prétérit</b>.<br>Verbes <b>réguliers</b> : on ajoute <b>-ed</b> : visit → visited, play → played, watch → watched.<br>Verbes <b>irréguliers</b> (à apprendre !) : go → <b>went</b>, see → <b>saw</b>, have → <b>had</b>, make → <b>made</b>, write → <b>wrote</b>.<br>Négation : <b>didn't</b> + verbe de base : I didn't go. Question : <b>Did</b> you see it ?<br>Marqueurs : yesterday (hier), last night (hier soir), two days ago (il y a deux jours).","Réguliers : verbe + -ed|Irréguliers : go-went, see-saw, have-had, make-made, write-wrote|Négation : didn't + base|Question : Did + sujet + base ?|yesterday / last week / ago","to imagine=imaginer;story=histoire;to write=écrire;to dream=rêver;real=réel;strange=étrange;yesterday=hier;character=personnage",[["Yesterday I ___ to the museum.","go|went|goed",1,"Hier, je suis allé au musée."],["She ___ watch the film.","didn't|doesn't|wasn't",0,"Elle n'a pas regardé le film."],["___ you see the play last night?","Do|Did|Were",1,"As-tu vu la pièce hier soir ?"]],[["She ___ a film last night. (see)","saw","Elle a vu un film hier soir."],["Roald Dahl ___ many stories. (write)","wrote","Roald Dahl a écrit beaucoup d'histoires."],["We ___ football yesterday. (play)","played","Nous avons joué au foot hier."]],[["Roald Dahl wrote many stories","Roald Dahl a écrit beaucoup d'histoires."],["I didn't see the film","Je n'ai pas vu le film."]]],
+["🏫","École et loisirs","Pour exprimer la <b>permission</b>, l'<b>obligation</b> ou l'<b>interdiction</b>, on utilise des verbes modaux suivis du <b>verbe de base</b> (sans -s, sans to) :<br><b>can</b> = pouvoir : You can join the club. <i>(Tu peux rejoindre le club.)</i><br><b>must</b> = devoir : Pupils must wear a uniform. <i>(Les élèves doivent porter l'uniforme.)</i><br><b>mustn't</b> = interdit : You mustn't run. <i>(Il est interdit de courir.)</i><br><b>can't</b> = ne pas pouvoir.<br>Dans les écoles anglo-saxonnes, les <b>clubs</b> (chess club, drama club) sont très populaires.","can = pouvoir / avoir le droit|must = obligation|mustn't = interdiction|Modal + verbe de base (pas de -s)|club, uniform, timetable, subject","school uniform=uniforme scolaire;club=club;subject=matière;timetable=emploi du temps;rule=règle;teacher=professeur;canteen=cantine;playground=cour de récréation",[["You ___ eat in the museum. (interdit)","mustn't|must|can",0,"Il est interdit de manger au musée."],["Pupils ___ wear a uniform. (obligation)","must|mustn't|can't",0,"Les élèves doivent porter un uniforme."],["She ___ speak three languages.","can|cans|can to",0,"Elle sait parler trois langues."]],[["Pupils ___ wear a uniform. (obligation)","must","Les élèves doivent porter un uniforme."],["You ___ run in the corridor. (interdit)","mustn't|can't","Il est interdit de courir dans le couloir."],["I ___ join the chess club. (pouvoir)","can","Je peux rejoindre le club d'échecs."]],[["You can join the chess club","Tu peux rejoindre le club d'échecs."],["We must be on time","Nous devons être à l'heure."]]],
+["🗣️","Des langues, des lieux, des histoires","Pour parler du <b>futur</b> : <b>will</b> + verbe de base : I <b>will visit</b> New York one day. <i>(Je visiterai New York un jour.)</i><br>Négation : <b>won't</b> (= will not). Question : <b>Will</b> you come ?<br>Pour un projet proche : <b>be going to</b> + verbe : I'm going to see a play. <i>(Je vais voir une pièce.)</i><br>Pour donner son avis : <b>I think</b> that… <i>(Je pense que…)</i>, <b>I believe</b> that…, <b>In my opinion</b>…<br>L'anglais change selon les lieux : British <i>(autumn, flat)</i> / American <i>(fall, apartment)</i>.","will + verbe de base|won't = will not|be going to = projet proche|I think / I believe / In my opinion|British autumn = American fall","language=langue;English=anglais;to speak=parler;city=ville;history=histoire;migration=migration;holiday=fête, vacances;tradition=tradition",[["Tomorrow we ___ Ellis Island.","visited|will visit|visits",1,"Demain nous visiterons Ellis Island."],["I think ___ English is fun.","that|what|to",0,"Je pense que l'anglais est amusant."],["It ___ rain tomorrow.","won't|doesn't|isn't",0,"Il ne pleuvra pas demain."]],[["I ___ visit London next year. (futur)","will","Je visiterai Londres l'année prochaine."],["I ___ that English is fun. (penser)","think|believe","Je pense que l'anglais est amusant."],["I'm ___ to see a play tonight.","going","Je vais voir une pièce ce soir."]],[["I will visit New York one day","Je visiterai New York un jour."],["In my opinion English is useful","À mon avis, l'anglais est utile."]]],
+["🇬🇧","Le Royaume-Uni","Le <b>Royaume-Uni</b> (the United Kingdom) compte <b>quatre nations</b> : <b>England</b> (capitale : London), <b>Scotland</b> (Edinburgh), <b>Wales</b> (Cardiff) et <b>Northern Ireland</b> (Belfast).<br>Attention : la <b>République d'Irlande</b> (capitale : Dublin) n'est <b>pas</b> dans le Royaume-Uni.<br>Repères : <b>Big Ben</b>, <b>the Tube</b> (le métro de Londres), <b>the BBC</b> (télévision publique), <b>the King</b> et la famille royale, <b>the pound</b> (£) = la monnaie.<br>On dit : London <b>is</b> the capital <b>of</b> the UK.","4 nations : England, Scotland, Wales, Northern Ireland|Capitales : London, Edinburgh, Cardiff, Belfast|Irlande (Dublin) ≠ Royaume-Uni|the Tube, Big Ben, the BBC|pound sterling = livre sterling (£)","king=roi;queen=reine;capital=capitale;currency=monnaie;underground=métro;nation=nation;castle=château;neighbour=voisin",[["Which city is in the UK?","Dublin|Edinburgh|Madrid",1,"Quelle ville est au Royaume-Uni ?"],["The capital of Wales is ___ .","Cardiff|Belfast|Glasgow",0,"La capitale du pays de Galles est Cardiff."],["The ___ is the London underground.","Tube|Bus|Boat",0,"Le Tube est le métro de Londres."]],[["London is the ___ of the United Kingdom.","capital","Londres est la capitale du Royaume-Uni."],["The ___ is the money of the UK. (pound)","pound","La livre est la monnaie du Royaume-Uni."],["Edinburgh is the capital of ___ .","Scotland","Édimbourg est la capitale de l'Écosse."]],[["The Tube is the London underground","Le Tube est le métro de Londres."],["The BBC is a British institution","La BBC est une institution britannique."]]]
+],[
+["🏒","Sport et société","Pour <b>comparer</b> :<br>• adjectif court : <b>-er than</b> : tall → <b>taller than</b> <i>(plus grand que)</i><br>• adjectif long : <b>more … than</b> : <b>more popular than</b> <i>(plus populaire que)</i><br>• égalité : <b>as … as</b> : as fast as <i>(aussi rapide que)</i><br>Superlatif : <b>the + -est</b> (the tallest) ou <b>the most</b> + adjectif (the most famous).<br>Exceptions : good → better → <b>the best</b> ; bad → worse → <b>the worst</b>.<br>Sports : hockey (Canada), cricket (Commonwealth), NCAA (États-Unis).","Court : -er than / the -est|Long : more … than / the most …|as … as = aussi … que|good-better-best, bad-worse-worst|Un seul mot de comparaison : taller than, pas more taller","match=match;team=équipe;player=joueur;to win=gagner;to lose=perdre;fan=supporter;champion=champion;stadium=stade",[["Hockey is ___ than cricket here.","more popular|popularer|most popular",0,"Le hockey est plus populaire que le cricket ici."],["He is the ___ player in the team.","good|better|best",2,"C'est le meilleur joueur de l'équipe."],["She is ___ than me.","taller|more tall|tallest",0,"Elle est plus grande que moi."]],[["She is ___ than me. (tall)","taller","Elle est plus grande que moi."],["He runs as ___ as a champion. (fast)","fast","Il court aussi vite qu'un champion."],["This is the ___ match of the year. (good)","best","C'est le meilleur match de l'année."]],[["He is the best player in the team","C'est le meilleur joueur de l'équipe."],["Football is more popular than rugby","Le football est plus populaire que le rugby."]]],
+["🧭","Voyages et explorations","Pour parler d'une <b>expérience</b> ou d'un événement lié au présent : le <b>present perfect</b> = <b>have / has + participe passé</b>.<br>I <b>have visited</b> Scotland. <i>(J'ai visité l'Écosse.)</i> — She <b>has never been</b> to Australia. <i>(Elle n'est jamais allée en Australie.)</i><br>Participes irréguliers : be → <b>been</b>, go → <b>gone</b>, see → <b>seen</b>, do → <b>done</b>.<br>Mots-clés : <b>ever</b> (déjà, en question), <b>never</b> (jamais), <b>for</b> + durée (for three years), <b>since</b> + date (since 2018).<br>Avec une date passée précise (yesterday, in 1911), on utilise le prétérit.","have / has + participe passé|ever / never|for + durée, since + date|been, gone, seen, done|Date précise passée → prétérit","journey=voyage;explorer=explorateur;expedition=expédition;ship=bateau;crew=équipage;ice=glace;to discover=découvrir;adventure=aventure",[["Shackleton ___ never reached the Pole.","have|has|had been",1,"Shackleton n'a jamais atteint le pôle."],["I have ___ to Scotland twice.","be|been|was",1,"Je suis allé deux fois en Écosse."],["We have lived here ___ 2018.","for|since|ago",1,"Nous vivons ici depuis 2018."]],[["I have ___ to Australia. (be)","been","Je suis allé en Australie."],["She has ___ seen a kangaroo. (jamais)","never","Elle n'a jamais vu de kangourou."],["They have explored the Antarctic ___ ten years.","for","Ils explorent l'Antarctique depuis dix ans."]],[["They have explored the Antarctic","Ils ont exploré l'Antarctique."],["Have you ever visited London","As-tu déjà visité Londres ?"]]],
+["🏙️","Villes, villages, quartiers","Pour <b>décrire une ville ou un quartier</b> :<br>• les <b>superlatifs</b> : the biggest city, the oldest building, the most beautiful park.<br>• les <b>lieux</b> : downtown (centre-ville), suburbs (banlieue), neighbourhood (quartier).<br>• les <b>prépositions de lieu</b> : <b>next to</b> (à côté de), <b>near</b> (près de), <b>opposite</b> (en face de), <b>between</b> (entre), <b>in the background</b> (à l'arrière-plan).<br>Pour décrire une photo : <b>on the left / on the right</b>, <b>at the top / at the bottom</b>.","the + -est / the most + adjectif|next to, near, opposite, between|on the left / right, at the top / bottom|downtown, suburbs, neighbourhood|There is / There are pour décrire","neighbour=voisin;neighbourhood=quartier;street=rue;suburb=banlieue;downtown=centre-ville;bridge=pont;wall=mur;community=communauté",[["Melbourne is the ___ city in Victoria.","bigger|biggest|more big",1,"Melbourne est la plus grande ville de Victoria."],["The bank is ___ the post office.","opposite|between|near to of",0,"La banque est en face de la poste."],["On the photo, the bridge is ___ the right.","in|on|at",1,"Sur la photo, le pont est à droite."]],[["The bridge is ___ to the old building. (à côté)","next","Le pont est à côté du vieux bâtiment."],["This is the ___ building in town. (old)","oldest","C'est le plus vieux bâtiment de la ville."],["There is a park ___ the station. (près de)","near","Il y a un parc près de la gare."]],[["There is a park near the station","Il y a un parc près de la gare."],["The bank is next to the school","La banque est à côté de l'école."]]],
+["💡","Inventer, innover, créer","Pour donner des précisions sur une personne ou une chose : les <b>pronoms relatifs</b>.<br><b>who</b> pour une <b>personne</b> : The man <b>who</b> invented the telephone was Scottish. <i>(L'homme qui a inventé le téléphone était écossais.)</i><br><b>which</b> (ou <b>that</b>) pour une <b>chose</b> : The machine <b>which</b> he created changed the world.<br>Pour raconter une invention : le <b>prétérit</b> : he invented, she discovered, they created.<br><b>Thanks to</b> the internet… <i>(Grâce à internet…)</i>","who = personne|which / that = chose|Prétérit : invented, discovered, created|thanks to = grâce à|Verbes : invent, create, improve, discover","inventor=inventeur;invention=invention;machine=machine;idea=idée;to invent=inventer;to improve=améliorer;fashion=mode;technology=technologie",[["The engineer ___ invented it was Scottish.","which|who|where",1,"L'ingénieur qui l'a inventé était écossais."],["The phone ___ he created changed the world.","who|which|whose",1,"Le téléphone qu'il a créé a changé le monde."],["Alexander Bell ___ the telephone.","invent|invented|inventing",1,"Alexander Bell a inventé le téléphone."]],[["The woman ___ discovered radium was Marie Curie.","who","La femme qui a découvert le radium était Marie Curie."],["The machine ___ he made was very useful.","which|that","La machine qu'il a fabriquée était très utile."],["He ___ a new machine in 1900. (create)","created","Il a créé une nouvelle machine en 1900."]],[["She invented a new machine","Elle a inventé une nouvelle machine."],["The man who invented it was Scottish","L'homme qui l'a inventé était écossais."]]],
+["🎭","Langages et messages artistiques","Pour <b>donner son avis de façon nuancée</b> :<br><b>To my mind</b> / <b>In my opinion</b> / <b>I think</b> <i>(à mon avis / je pense)</i><br>Intensité : <b>quite</b> (assez), <b>really</b> (vraiment), <b>absolutely</b> (absolument), <b>not very</b> (pas très).<br>Comparer : <b>as good as</b> (aussi bon que), <b>not as good as</b> (pas aussi bon que), <b>better than</b>.<br>Pour parler d'une œuvre : the <b>actors</b>, the <b>music</b>, the <b>plot</b> (l'intrigue), the <b>setting</b> (le décor).<br><i>To my mind, the music was not as convincing as the actors.</i>","To my mind / In my opinion|quite / really / absolutely|as … as / not as … as|plot, setting, actors, music|I loved… / I didn't like… because…","actor=acteur;stage=scène;music=musique;joke=blague;message=message;audience=public;theatre=théâtre;masterpiece=chef-d'œuvre",[["Which sentence gives an opinion?","To my mind, it's great|It is on page 5|Yesterday I went",0,"Laquelle donne un avis ?"],["The book is ___ good as the film.","as|than|more",0,"Le livre est aussi bon que le film."],["I thought the film was ___ funny.","really|real|reality",0,"J'ai trouvé le film vraiment drôle."]],[["The film was not as good ___ the book.","as","Le film n'était pas aussi bon que le livre."],["___ my mind, it is a masterpiece.","to","À mon avis, c'est un chef-d'œuvre."],["The actors were ___ amazing. (absolument)","absolutely","Les acteurs étaient absolument incroyables."]],[["To my mind this film is a masterpiece","À mon avis ce film est un chef-d'œuvre."],["The music was not very convincing","La musique n'était pas très convaincante."]]],
+["☘️","L'Irlande","L'<b>Irlande</b> (Ireland) est indépendante depuis <b>1922</b> et membre de l'Union européenne depuis <b>1973</b>. Sa capitale est <b>Dublin</b>. Ne la confonds pas avec l'Irlande du Nord (Royaume-Uni).<br>On dit <b>Céad míle fáilte</b> : « cent mille bienvenues » ! Les Irlandais sont réputés très accueillants.<br>Pour imaginer une situation : <b>If + prétérit, would + verbe</b>.<br>If I <b>went</b> to Ireland, I <b>would visit</b> Galway. <i>(Si j'allais en Irlande, je visiterais Galway.)</i><br>Avec <b>be</b>, on dit souvent <b>were</b> : If I <b>were</b> in Dublin…","Irlande : indépendante en 1922, UE en 1973|Capitale : Dublin|If + prétérit, would + verbe|If I were… (be → were)|Céad míle fáilte = cent mille bienvenues","Ireland=Irlande;green=vert;legend=légende;coast=côte;cliff=falaise;welcome=bienvenue;music=musique;tradition=tradition",[["If I ___ in Dublin, I would visit Trinity College.","am|were|will be",1,"Si j'étais à Dublin, je visiterais Trinity College."],["The capital of Ireland is ___ .","Dublin|Belfast|Cork",0,"La capitale de l'Irlande est Dublin."],["If I had time, I ___ go to Galway.","will|would|can",1,"Si j'avais le temps, j'irais à Galway."]],[["I ___ love to see the Wild Atlantic Way.","would","J'adorerais voir la Wild Atlantic Way."],["If I ___ rich, I would travel. (be)","were","Si j'étais riche, je voyagerais."],["Ireland became independent in ___ . (année)","1922","L'Irlande est devenue indépendante en 1922."]],[["If I went to Ireland I would visit Galway","Si j'allais en Irlande, je visiterais Galway."],["Ireland is a member of the European Union","L'Irlande est membre de l'Union européenne."]]]
+],[
+["🤝","À la rencontre de l'autre","Pour <b>raconter une rencontre au passé</b>, on combine deux temps :<br>• le <b>prétérit simple</b> pour l'action principale : <i>I met her.</i><br>• le <b>prétérit en -ing</b> (<b>was / were + verbe-ing</b>) pour une action en cours : <i>I was walking.</i><br><b>While</b> + was/were -ing, <b>when</b> + prétérit : <i>I was walking <b>when</b> I met her.</i> (Je marchais quand je l'ai rencontrée.)<br>James Cook <b>met</b> the Maori in 1769. They <b>were fishing</b> when the ship arrived.","Prétérit simple = action terminée|was / were + -ing = action en cours|while + -ing, when + prétérit|met, saw, came, made|to meet = rencontrer","to meet=rencontrer;friendship=amitié;stranger=étranger;to understand=comprendre;to argue=se disputer;to make peace=faire la paix;culture=culture;relationship=relation",[["I ___ walking when I met her.","was|am|were",0,"Je marchais quand je l'ai rencontrée."],["They met ___ they were travelling.","while|because|so",0,"Ils se sont rencontrés pendant qu'ils voyageaient."],["He ___ the Maori in 1769.","meets|met|meeting",1,"Il a rencontré les Maoris en 1769."]],[["They ___ the Maori in 1769. (meet)","met","Ils ont rencontré les Maoris en 1769."],["We ___ talking when he arrived. (be)","were","Nous parlions quand il est arrivé."],["I was reading ___ the phone rang.","when","Je lisais quand le téléphone a sonné."]],[["They met while they were travelling","Ils se sont rencontrés pendant qu'ils voyageaient."],["I was walking when I saw her","Je marchais quand je l'ai vue."]]],
+["💼","Travailler hier, aujourd'hui, demain","La <b>voix passive</b> met en valeur <b>ce qui subit l'action</b> : <b>be + participe passé</b>.<br>Actif : <i>People speak English in many countries.</i><br>Passif : <i>English <b>is spoken</b> in many countries.</i> (L'anglais est parlé dans de nombreux pays.)<br>On change le temps de <b>be</b> : <b>is / are</b> (présent), <b>was / were</b> (passé) : <i>Children <b>were forced</b> to work.</i><br>Pour dire <b>qui</b> a fait l'action : <b>by</b> : <i>The job was offered to her by the manager.</i><br>Vocabulaire : job, odd job (petit boulot), CV, interview, to earn money.","Passif = be + participe passé|is / are (présent), was / were (passé)|by = par (complément d'agent)|Participes : made, spoken, written, built|job, interview, odd job, to earn money","job=emploi;to earn=gagner (de l'argent);salary=salaire;interview=entretien;employee=employé;factory=usine;experience=expérience;unemployed=au chômage",[["Children ___ to work in factories.","were forced|forced|were force",0,"Des enfants étaient forcés de travailler en usine."],["English ___ in many countries.","speaks|is spoken|is speaking",1,"L'anglais est parlé dans de nombreux pays."],["The car ___ made in Detroit.","is|are|do",0,"La voiture est fabriquée à Détroit."]],[["English is ___ in many countries. (speak)","spoken","L'anglais est parlé dans de nombreux pays."],["The house ___ built in 1900. (be)","was","La maison a été construite en 1900."],["The book was written ___ a young author.","by","Le livre a été écrit par un jeune auteur."]],[["The job was offered to her","Le poste lui a été proposé."],["English is spoken in many countries","L'anglais est parlé dans de nombreux pays."]]],
+["🚢","Voyages et migrations","Le <b>past perfect</b> (<b>had + participe passé</b>) exprime une action <b>passée avant une autre action passée</b>.<br><i>They <b>had left</b> their home before the war started.</i> (Ils avaient quitté leur maison avant le début de la guerre.)<br>Négation : <b>hadn't</b> + participe passé. Question : <b>Had</b> they arrived ?<br>Mots utiles : <b>before</b> (avant), <b>after</b> (après), <b>already</b> (déjà), <b>by the time</b> (au moment où).<br>Vocabulaire : <b>migrant</b>, <b>to settle</b> (s'installer), <b>border</b> (frontière), <b>abroad</b> (à l'étranger).","had + participe passé|Action 1 (avant) → Action 2 (prétérit)|before / after / already|hadn't = had not|migrant, border, to settle, abroad","migrant=migrant;border=frontière;to settle=s'installer;abroad=à l'étranger;tourist=touriste;journey=voyage;to leave=quitter, partir;dream=rêve",[["They ___ left before it started.","had|have|has",0,"Ils étaient partis avant que ça commence."],["When we arrived, the train ___ already left.","has|had|was",1,"Quand nous sommes arrivés, le train était déjà parti."],["She ___ never travelled abroad before 2020.","hadn't|had|has",1,"Elle n'avait jamais voyagé à l'étranger avant 2020."]],[["She had ___ in Australia for years. (live)","lived","Elle avait vécu en Australie pendant des années."],["They ___ left before the war. (had)","had","Ils étaient partis avant la guerre."],["I arrived ___ the film had started. (après que)","after","Je suis arrivé après que le film avait commencé."]],[["They had left their home before the war","Ils avaient quitté leur maison avant la guerre."],["She had already crossed the border","Elle avait déjà franchi la frontière."]]],
+["📺","Langages et médias","Le <b>discours rapporté</b> raconte ce que quelqu'un a dit. Si le verbe d'introduction est au passé, on « <b>recule</b> » d'un temps :<br>« I <b>am</b> tired » → He said (that) he <b>was</b> tired. <i>(Il a dit qu'il était fatigué.)</i><br>« I <b>will</b> come » → She said she <b>would</b> come. « I <b>went</b> » → He said he <b>had gone</b>.<br>Verbes : <b>say</b> (He said that…), <b>tell</b> + personne (He told me that…), <b>ask</b> (She asked if / why…).<br>Les repères changent aussi : <b>now → then</b>, <b>today → that day</b>.<br>Question rapportée : « Do you like it ? » → She asked <b>if</b> I liked it.","Recul des temps : am → was, will → would|say that / tell somebody that|ask if / ask why / ask where|Pas de point d'interrogation|now → then, today → that day","newspaper=journal;advert=publicité;speech=discours;fake news=infox;to say=dire;to ask=demander;to influence=influencer;media=médias",[["He said: « I am tired. » → He said he ___ tired.","is|was|were",1,"Il a dit qu'il était fatigué."],["She ___ me that she was late.","said|told|asked",1,"Elle m'a dit qu'elle était en retard."],["He asked me ___ I liked the film.","if|that|what",0,"Il m'a demandé si j'aimais le film."]],[["She asked me ___ I liked the film.","if","Elle m'a demandé si j'aimais le film."],["He said he ___ come. (will → ?)","would","Il a dit qu'il viendrait."],["She ___ me that she was tired. (tell)","told","Elle m'a dit qu'elle était fatiguée."]],[["He told me that he was tired","Il m'a dit qu'il était fatigué."],["She asked me if I liked music","Elle m'a demandé si j'aimais la musique."]]],
+["✊","Formes de l'engagement","Pour parler d'<b>hypothèses</b> et de <b>regrets</b> :<br>• <b>If + présent, will + verbe</b> (possible) : <i>If we protest, things <b>will</b> change.</i> (Si nous manifestons, les choses changeront.)<br>• <b>If + prétérit, would + verbe</b> (imaginaire) : <i>If I had time, I <b>would</b> volunteer.</i> (Si j'avais le temps, je serais bénévole.)<br>• <b>I wish + prétérit</b> (regret) : <i>I wish I <b>had</b> more time.</i> (J'aimerais avoir plus de temps.)<br>Pour peser le pour et le contre : <b>On the one hand</b>… <b>on the other hand</b>…","If + présent, will|If + prétérit, would|I wish + prétérit|On the one hand… on the other hand|to fight for, to protest, to volunteer","to protest=manifester;rights=droits;equality=égalité;volunteer=bénévole;to support=soutenir;cause=cause;freedom=liberté;to fight for=se battre pour",[["If we protest, things ___ change.","will|would|had",0,"Si nous manifestons, les choses changeront."],["If I had time, I ___ volunteer.","will|would|am",1,"Si j'avais le temps, je serais bénévole."],["I wish I ___ more time to help.","have|had|will have",1,"J'aimerais avoir plus de temps pour aider."]],[["I wish I ___ more time to help. (have)","had","J'aimerais avoir plus de temps pour aider."],["If it rains, we ___ stay at home. (futur)","will","S'il pleut, nous resterons à la maison."],["On the ___ hand, it is great.","other|one","D'un côté (ou de l'autre), c'est super."]],[["On the one hand it is great","D'un côté, c'est super."],["If I had time I would volunteer","Si j'avais le temps, je ferais du bénévolat."]]],
+["🗽","Les États-Unis","Les <b>États-Unis</b> (the USA) comptent <b>50 États</b>, de grands paysages (montagnes, déserts, côtes) et des villes célèbres : <b>New York</b>, <b>Chicago</b>, <b>Los Angeles</b>. La capitale est <b>Washington, D.C.</b><br>Pour <b>situer</b> un lieu : <b>north / south / east / west of</b> : <i>Chicago is <b>north of</b> Texas.</i> (Chicago est au nord du Texas.)<br>Histoire : <b>Lewis and Clark explored</b> the West in 1804-1806. <i>(Lewis et Clark ont exploré l'Ouest.)</i><br>Mots-clés : <b>the Mississippi</b>, <b>the Sun Belt</b> (le sud du pays), <b>soft power</b> (influence culturelle).<br>British <i>pavement, lift</i> / American <i>sidewalk, elevator</i>.","50 États, capitale Washington D.C.|north / south / east / west of|Lewis et Clark : exploration de l'Ouest (1804-1806)|the Mississippi, the Sun Belt, Chicago|sidewalk (US) = pavement (GB)","state=État;west=ouest;north=nord;east=est;south=sud;skyscraper=gratte-ciel;expedition=expédition;desert=désert",[["Chicago is ___ of Texas.","north|nord|norther",0,"Chicago est au nord du Texas."],["Lewis and Clark ___ the West.","explore|explored|exploring",1,"Lewis et Clark ont exploré l'Ouest."],["En anglais américain, « sidewalk » veut dire…","trottoir|route|magasin",0,"Sidewalk = trottoir."]],[["Lewis and Clark ___ the Pacific in 1805. (reach)","reached","Lewis et Clark ont atteint le Pacifique en 1805."],["New York is ___ of Washington. (au nord)","north","New York est au nord de Washington."],["The capital of the USA is ___ , D.C.","Washington","La capitale des États-Unis est Washington, D.C."]],[["They explored the territory west of the Mississippi","Ils ont exploré le territoire à l'ouest du Mississippi."],["Chicago is a famous American city","Chicago est une célèbre ville américaine."]]]
+]];
+
+const ALL=D.flatMap((a,l)=>a.map((_,i)=>[l,i]));
+const STOPS=[["🚉","Eurostar Station"],["🎡","London Eye"],["🕰️","Big Ben"],["🐉","Loch Ness"],["☘️","Dublin"],["⛰️","Cliffs of Moher"],["🗽","New York"],["🌆","Chicago"],["🏜️","Grand Canyon"],["🎬","Hollywood"],["🦘","Sydney"],["👑","Treasure Island"]];
+const TE=["🏋️","🧗","🚀","🌋","🏝️","🛶","🎪","🏰","🌌","🛰️"];
+const GR=["Rookie","Explorer","Adventurer","Hero","Champion","Legend"];
+// Bonus débloqués : [id, emoji ou couleur, emplacement, nom, étape à franchir]
+const ITEMS=[["h1","🎩","hat","Haut-de-forme",1],["h2","🧢","hat","Casquette",2],["h3","🎓","hat","Diplômé",4],["h4","🤠","hat","Cow-boy",6],["h5","👑","hat","Couronne",9],
+["f1","🕶️","face","Soleil",2],["f2","🥽","face","Explorateur",5],["f3","🥸","face","Déguisement",8],
+["o1","☂️","hand","Parapluie",3],["o2","🎸","hand","Guitare",5],["o3","📚","hand","Livres",7],["o4","🏆","hand","Trophée",10],
+["p1","🐶","pet","Chien",3],["p2","🐱","pet","Chat",6],["p3","🦊","pet","Renard",9],["p4","🦄","pet","Licorne",12],
+["a1","#ffd6a5","aura","Pêche",1],["a2","#bde0fe","aura","Ciel",4],["a3","#caffbf","aura","Menthe",7],["a4","#d0bfff","aura","Violet",11]];
+const SLOTS=[["hat","🎩 Chapeaux"],["face","😎 Lunettes"],["hand","🎒 Objets"],["pet","🐾 Compagnons"],["aura","🎨 Couleurs"]];
+const LEGAL_CONTACT=""; // ex. "contact@exemple.fr" (facultatif)
+const info=k=>k<12?{e:STOPS[k][0],n:STOPS[k][1],lv:Math.floor(k/3),t:LV[Math.floor(k/3)]}:{e:TE[(k-12)%10],n:"Camp d'entraînement n°"+(k-11),lv:3,t:"Révisions 6ème → 3ème",train:1};
+// ===== Outils
+const $=s=>document.querySelector(s),app=$("#app");
+const R=n=>Math.floor(Math.random()*n),sh=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const nm=s=>s.toLowerCase().replace(/[’]/g,"'").replace(/[.!?,;:]/g,"").replace(/\s+/g," ").trim();
+const H=(h,c)=>{const d=document.createElement("div");if(c)d.className=c;d.innerHTML=h;return d};
+const h2=t=>Object.assign(document.createElement("h2"),{textContent:t});
+const say=t=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";speechSynthesis.speak(u)}catch(e){}};
+let S={pts:0,stage:0,done:{},best:{},eq:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem("ec2")||"{}"))}catch(e){}
+S.eq=S.eq||{};
+const save=()=>{try{localStorage.setItem("ec2",JSON.stringify(S))}catch(e){}};
+const upd=()=>{$("#score").textContent="⭐ "+S.pts};
+let backFn=null;
+const nav=(b,t)=>{backFn=b;$("#back").style.visibility=b?"visible":"hidden";app.innerHTML="";window.scrollTo(0,0);upd();document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x.dataset.t==t))};
+$("#back").onclick=()=>backFn&&backFn();$("#logo").onclick=home;
+// ===== Personnage (dessin hero.png si présent, sinon emoji) + bonus portés
+const worn=s=>ITEMS.find(i=>i[0]==S.eq[s]&&i[4]<=S.stage);
+function avatar(px){
+  const g=s=>{const i=worn(s);return i?i[1]:""},au=worn("aura");
+  return `<div class="av" style="font-size:${px}px;${au?"background:"+au[1]:""}"><img class="b" src="hero.png" alt="" onerror="this.outerHTML='<span class=b>🧒</span>'"><span class="hat">${g("hat")}</span><span class="fc">${g("face")}</span><span class="hd">${g("hand")}</span><span class="pt">${g("pet")}</span></div>`;
+}
+// ===== Génération aléatoire d'exercices pour un axe
+function gen(l,i){
+  const a=D[l][i],V=D[l].flatMap(x=>x[4].split(";").map(y=>y.split("="))),out=[];
+  a[4].split(";").map(x=>x.split("=")).forEach(([en,fr])=>{
+    const o=V.filter(v=>v[0]!=en&&v[1]!=fr);
+    const o1=sh([fr,...sh(o).slice(0,2).map(v=>v[1])]);out.push({t:"q",q:"Que veut dire « "+en+" » ?",o:o1,a:o1.indexOf(fr),sp:en});
+    const o2=sh([en,...sh(o).slice(0,2).map(v=>v[0])]);out.push({t:"q",q:"Comment dit-on « "+fr+" » en anglais ?",o:o2,a:o2.indexOf(en),sp:en});
+    out.push({t:"f",q:"Écris en anglais : « "+fr+" »",a:en.toLowerCase()+(en.startsWith("to ")?"|"+en.slice(3).toLowerCase():""),sp:en});
+  });
+  a[5].forEach(([q,o,k,tr])=>{const p=o.split("|"),c=p[k],s=sh(p);out.push({t:"q",q,o:s,a:s.indexOf(c),tr})});
+  a[6].forEach(([q,an,tr])=>out.push({t:"f",q:"Complète : "+q,a:an.toLowerCase(),tr,sp:q.replace("___",an.split("|")[0])}));
+  a[7].forEach(([s,tr])=>out.push({t:"o",a:s,tr,sp:s}));
+  return out;
+}
+// ===== Un exercice
+function ask(c,e,cb){
+  let fin=false;const msg=H("","msg"),blank="<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>";
+  const end=(ok,ans)=>{if(fin)return;fin=true;msg.className="msg "+(ok?"ok":"ko");msg.textContent=ok?"✅ Bravo !":"❌ Réponse : "+ans;
+    if(e.tr&&!c.querySelector(".tr"))c.insertBefore(H("🇫🇷 "+e.tr,"tr"),msg);
+    if(e.sp){const b=H("🔊 Écouter","say");b.onclick=()=>say(e.sp);c.append(b)}cb(ok)};
+  if(e.t=="q"){
+    c.append(H(e.q.replace("___",blank),"q"));if(e.tr)c.append(H("🇫🇷 "+e.tr,"tr"));
+    e.o.forEach((t,i)=>{const b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=()=>{if(fin)return;b.classList.add(i==e.a?"ok":"ko");c.querySelectorAll(".opt")[e.a].classList.add("ok");end(i==e.a,e.o[e.a])};c.append(b)});
+  }else if(e.t=="f"){
+    c.append(H(e.q.replace("___",blank),"q"));if(e.tr)c.append(H("🇫🇷 "+e.tr,"tr"));
+    const i=document.createElement("input");i.type="text";i.placeholder="Ta réponse…";i.autocapitalize="off";i.autocomplete="off";i.spellcheck=false;
+    const g=document.createElement("button");g.className="btn main";g.textContent="Valider";
+    g.onclick=()=>{if(fin)return;end(e.a.split("|").includes(nm(i.value)),e.a.split("|")[0])};i.onkeydown=k=>{if(k.key=="Enter")g.click()};c.append(i,g);
+  }else{
+    c.append(H("Remets les mots dans l'ordre :","q"));c.append(H("🇫🇷 "+e.tr,"tr"));
+    const z=H("","chips zone"),p=H("","chips");
+    sh(e.a.split(" ")).forEach(w=>{const b=document.createElement("button");b.className="chip";b.textContent=w;b.onclick=()=>{if(!fin)(b.parentNode==p?z:p).append(b)};p.append(b)});
+    const g=document.createElement("button");g.className="btn main";g.textContent="Valider";
+    g.onclick=()=>{if(fin)return;end(nm([...z.children].map(x=>x.textContent).join(" "))==nm(e.a),e.a)};c.append(z,p,g);
+  }
+  c.append(msg);
+}
+// ===== Une série
+function series(box,list,fin){
+  let i=0,ok=0;
+  const next=()=>{
+    if(i>=list.length)return fin(ok,list.length);
+    box.innerHTML="";window.scrollTo(0,0);
+    box.append(H(`<small>Question ${i+1} / ${list.length}</small><div class="bar"><i style="width:${i/list.length*100}%"></i></div>`));
+    const c=H("","card");box.append(c);
+    ask(c,list[i],r=>{if(r)ok++;i++;const b=document.createElement("button");b.className="btn main";b.textContent=i>=list.length?"Terminer 🏁":"Suivant ➜";b.onclick=next;c.append(b);b.scrollIntoView({block:"nearest",behavior:"smooth"})});
+  };next();
+}
+// ===== Accueil
+function home(){
+  nav(null,"home");
+  app.append(H(`${avatar(40)}<div><h3>Hello ! Ready to go ?</h3><p>Étape ${S.stage+1} de la route · ${Object.keys(S.done).length} thèmes réussis</p></div>`,"hero-card"));
+  const pb=H("🗺️ Continuer l'aventure","btn main");pb.onclick=()=>journey();app.append(pb);
+  app.append(h2("📚 Réviser par classe"));
+  const g=H("","grid");
+  LV.forEach((l,k)=>{const n=Object.keys(S.done).filter(x=>x.startsWith(k+"-")).length,b=H(`${l}<small>${n} / ${D[k].length} thèmes réussis</small>`,"btn lv");b.style.setProperty("--c",CO[k][0]);b.style.setProperty("--c2",CO[k][1]);b.onclick=()=>level(k);g.append(b)});
+  app.append(g);
+}
+// ===== Niveau
+function level(l){
+  nav(home,"home");app.append(h2(LV[l]+" · Choisis un thème"));
+  D[l].forEach((a,i)=>{const id=l+"-"+i,b=H(`<span class="t" style="background:${CO[l][0]}33">${a[0]}</span><span><b>${a[1]}</b><small>Axe ${i+1}${S.best[id]!=null?" · ⭐ "+S.best[id]+"/8":""}${S.done[id]?" · ✔ réussi":""}</small></span>`,"btn axe");b.onclick=()=>axe(l,i);app.append(b)});
+}
+// ===== Axe : onglets Leçon / Exercices
+function axe(l,i){
+  const a=D[l][i],id=l+"-"+i;nav(()=>level(l),"home");
+  app.append(H(`<h3>${a[0]} ${a[1]}</h3><small class="tr">${LV[l]} · Axe ${i+1}</small>`,"card"));
+  const seg=H(`<button>📖 Leçon</button><button>✏️ Exercices</button>`,"seg"),box=H("");app.append(seg,box);
+  const bs=seg.querySelectorAll("button"),tab=n=>{bs.forEach((b,k)=>b.classList.toggle("on",k==n));box.innerHTML=""};
+  const lesson=()=>{tab(0);box.append(H(`<b>📖 Rappel de leçon</b><p>${a[2]}</p>`,"card lesson"),H(`<h3>💡 Ce qu'il faut retenir</h3><ul style="padding:0;margin:0">${a[3].split("|").map(x=>"<li>"+x+"</li>").join("")}</ul>`,"card retain"));const b=H("✏️ Passer aux exercices","btn main");b.onclick=ex;box.append(b)};
+  const ex=()=>{tab(1);const c=H(`<div class="em">✏️</div><h3>8 exercices au hasard</h3><p>5 bonnes réponses pour réussir le thème. Les questions changent à chaque série !</p>`,"card big"),go=H("🚀 C'est parti !","btn main");go.onclick=run;c.append(go);box.append(c)};
+  const run=()=>{tab(1);series(box,sh(gen(l,i)).slice(0,8),(ok,n)=>{const first=!S.done[id];if(ok>=5)S.done[id]=1;S.best[id]=Math.max(S.best[id]||0,ok);const p=ok*10+(first&&ok>=5?20:0);S.pts+=p;save();upd();
+    box.innerHTML="";const c=H(`<div class="em">${ok==n?"🏆":ok>=5?"🎉":"💪"}</div><h3>${ok} / ${n}</h3><p>+${p} points<br>${ok>=5?"Thème réussi !":"Il faut 5 bonnes réponses pour valider le thème. Courage !"}</p>`,"card big");
+    const r=H("🔄 Nouvelle série","btn main"),v=H("📖 Revoir la leçon","btn main alt"),bk=H("Retour aux thèmes","btn main alt");r.onclick=run;v.onclick=lesson;bk.onclick=()=>level(l);c.append(r,v,bk);box.append(c);window.scrollTo(0,0)})};
+  lesson();
+}
+// ===== Route (infinie)
+function journey(walk){
+  nav(null,"journey");const st=S.stage;
+  app.append(H(`<b>Grade : ${GR[Math.min(5,Math.floor(st/3))]}</b> · étape ${st+1}<div class="bar"><i style="width:${Math.min(st,12)/12*100}%"></i></div><small class="tr">Touche l'étape où se trouve ton héros pour jouer. Tu peux rejouer les étapes déjà passées.</small>`,"card"));
+  if(st>=12)app.append(H(`🏆 <b>Route principale terminée !</b> Le chemin continue : des camps d'entraînement qui révisent tout le programme de la 6ème à la 3ème, sans fin.`,"gift"));
+  const road=H("","road");let cur=null;
+  for(let k=Math.max(0,st-8);k<=st+3;k++){
+    const s=info(k),row=H("","stop "+(k%2?"l":"r")),nw=H("","nw"),n=document.createElement("button");
+    n.className="node "+(k<st?"done":k==st?"cur":"lock");n.textContent=k<st?"✔":s.e;n.setAttribute("aria-label",s.n);
+    if(k<=st)n.onclick=()=>stop(k);
+    nw.append(n);if(k==st){nw.append(H(avatar(36),"hero"+(walk?" walk":"")));cur=row}
+    row.append(H(`${s.n}<small>${s.t}${k%3==2?" · ⭐ étape finale":""}${k==st?" · 👆 Touche ici !":""}</small>`,"lab"),nw);road.append(row)}
+  app.append(road);
+  if(cur)setTimeout(()=>cur.scrollIntoView({block:"center",behavior:"smooth"}),60);
+}
+function stop(k){
+  nav(()=>journey(),"journey");const s=info(k),boss=k%3==2,n=s.train?(boss?10:8):(boss?8:6),m=s.lv+1;
+  const box=H("");app.append(box);
+  const intro=()=>{box.innerHTML="";const c=H(`<div class="em">${s.e}</div><h3>${s.n}</h3><p>${n} exercices · ${s.t}<br>Il faut ${n-2} bonnes réponses pour continuer la route.</p>`,"card big"),b=H("C'est parti ! 🚀","btn main");b.onclick=play;c.append(b);box.append(c)};
+  const play=()=>{const list=[];for(let j=0;j<n;j++){const [l,i]=s.train?ALL[((k-12)*n+j)%ALL.length]:[s.lv,R(D[s.lv].length)];list.push(sh(gen(l,i))[0])}
+    series(box,list,ok=>{const pass=ok>=n-2,first=pass&&k==S.stage,p=ok*10*m+(first?30:0);S.pts+=p;if(first)S.stage++;save();upd();
+      const gifts=first?ITEMS.filter(i=>i[4]==S.stage):[];
+      box.innerHTML="";const c=H(`<div class="em">${pass?"🎉":"💪"}</div><h3>${ok} / ${n}</h3><p>+${p} points<br>${pass?(first?"Ton héros continue sa route !":"Étape réussie !"):"Presque ! Il faut "+(n-2)+" bonnes réponses. Réessaie !"}</p>${gifts.length?`<div class="gift">🎁 Nouveau bonus : ${gifts.map(g=>g[2]=="aura"?"🎨 "+g[3]:g[1]+" "+g[3]).join(", ")} !</div>`:""}`,"card big");
+      const a=H(pass?"Continuer la route ➜":"🔄 Réessayer","btn main");a.onclick=()=>pass?journey(first):stop(k);c.append(a);
+      if(gifts.length){const g=H("🎒 Habiller mon héros","btn main alt");g.onclick=heroPage;c.append(g)}
+      if(!pass){const r=H("Retour à la route","btn main alt");r.onclick=()=>journey();c.append(r)}box.append(c)})};
+  intro();
+}
+// ===== Mon héros
+function heroPage(){
+  const y=window.scrollY;nav(null,"hero");
+  app.append(H(`<div style="display:grid;place-items:center;margin:14px 0 8px">${avatar(84)}</div><h3>Ton héros</h3><p class="tr">Chaque étape réussie sur la route débloque un bonus. Touche un objet pour le porter, touche-le encore pour l'enlever.</p>`,"card big"));
+  SLOTS.forEach(([s,t])=>{
+    const c=H(`<h3>${t}</h3>`,"card"),g=H("","items");
+    ITEMS.filter(i=>i[2]==s).forEach(i=>{const lock=i[4]>S.stage,on=S.eq[s]==i[0]&&!lock,b=document.createElement("button");
+      b.className="it"+(on?" on":"")+(lock?" lock":"");
+      b.innerHTML=(lock?"🔒":s=="aura"?`<i style="background:${i[1]}"></i>`:i[1])+`<small>${lock?"Étape "+i[4]:i[3]}</small>`;
+      if(!lock)b.onclick=()=>{S.eq[s]=on?null:i[0];save();heroPage()};g.append(b)});
+    c.append(g);app.append(c)});
+  app.append(H(`🖼️ Tu as un dessin ? Nomme-le <b>hero.png</b> (fond transparent) et place-le dans le dossier de l'application : il remplacera le personnage.`,"tr"));
+  window.scrollTo(0,y);
+}
+// ===== Mentions légales
+function legal(){
+  nav(()=>home(),"home");
+  app.append(H(`<h3>Mentions légales</h3>
+<p><b>Éditeur et propriétaire :</b> HENRY Clément.</p>
+<p><b>Propriété intellectuelle :</b> l'application « Let's Go English ! » (nom, code, textes, exercices, illustrations et organisation du contenu) est la propriété exclusive de HENRY Clément. Toute reproduction, représentation, modification, adaptation ou diffusion, totale ou partielle, sans autorisation écrite préalable de l'auteur est interdite.</p>
+<p><b>Données personnelles :</b> l'application ne collecte aucune donnée personnelle, n'utilise ni cookie de suivi ni publicité. Les points, la progression et les bonus du héros sont enregistrés uniquement sur l'appareil de l'utilisateur ; ils disparaissent si les données du navigateur sont effacées.</p>
+<p><b>Contenu pédagogique :</b> les exercices s'appuient sur le programme d'anglais des classes de collège.</p>
+${LEGAL_CONTACT?`<p><b>Contact :</b> ${LEGAL_CONTACT}</p>`:""}
+<p class="tr">© 2026 HENRY Clément – Tous droits réservés.</p>`,"card"));
+}
+$("#lg").onclick=legal;
+document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>({home:()=>home(),journey:()=>journey(),hero:heroPage})[b.dataset.t]());
+home();
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
