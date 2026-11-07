@@ -60,7 +60,7 @@ input[type=text]{font:inherit;padding:14px;border-radius:16px;border:2px solid v
 .gift{background:color-mix(in srgb,var(--sun) 25%,var(--card));border-radius:16px;padding:10px;margin:10px 0;font-weight:800}
 /* Avatar */
 .av{position:relative;width:1.6em;height:1.6em;display:inline-grid;place-items:center;border-radius:50%;flex:none}
-.av .b{font-size:1em;line-height:1}.av img.b{width:1.3em;height:1.3em;object-fit:contain}
+.av .b{font-size:1em;line-height:1}.av img.b{width:100%;height:100%;object-fit:contain}.av .ly{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .av .hat{position:absolute;top:-.3em;left:50%;transform:translateX(-50%);font-size:.55em;line-height:1}
 .av .fc{position:absolute;top:.52em;left:50%;transform:translateX(-50%);font-size:.42em;line-height:1}
 .av .hd{position:absolute;right:-.25em;bottom:.05em;font-size:.55em;line-height:1}
@@ -163,9 +163,11 @@ const nav=(b,t)=>{backFn=b;$("#back").style.visibility=b?"visible":"hidden";app.
 $("#back").onclick=()=>backFn&&backFn();$("#logo").onclick=home;
 // ===== Personnage (dessin hero.png si présent, sinon emoji) + bonus portés
 const worn=s=>ITEMS.find(i=>i[0]==S.eq[s]&&i[4]<=S.stage);
-function avatar(px){
-  const g=s=>{const i=worn(s);return i?i[1]:""},au=worn("aura");
-  return `<div class="av" style="font-size:${px}px;${au?"background:"+au[1]:""}"><img class="b" src="hero.png" alt="" onerror="this.outerHTML='<span class=b>🧒</span>'"><span class="hat">${g("hat")}</span><span class="fc">${g("face")}</span><span class="hd">${g("hand")}</span><span class="pt">${g("pet")}</span></div>`;
+const CL={hat:"hat",face:"fc",hand:"hd",pet:"pt"};
+function avatar(px,only){
+  const au=only?null:worn("aura"),sl=only?[only]:["hat","face","hand","pet"].map(worn).filter(Boolean);
+  const ly=sl.map(i=>`<img class="ly" src="items/${i[0]}.png" alt="" onerror="this.outerHTML='<span class=${CL[i[2]]}>${i[1]}</span>'">`).join("");
+  return `<div class="av" style="font-size:${px}px;${au?"background:"+au[1]:""}"><img class="b" src="hero.png" alt="" onerror="this.outerHTML='<span class=b>🧒</span>'">${ly}</div>`;
 }
 // ===== Génération aléatoire d'exercices pour un axe
 function gen(l,i){
@@ -279,10 +281,9 @@ function heroPage(){
     const c=H(`<h3>${t}</h3>`,"card"),g=H("","items");
     ITEMS.filter(i=>i[2]==s).forEach(i=>{const lock=i[4]>S.stage,on=S.eq[s]==i[0]&&!lock,b=document.createElement("button");
       b.className="it"+(on?" on":"")+(lock?" lock":"");
-      b.innerHTML=(lock?"🔒":s=="aura"?`<i style="background:${i[1]}"></i>`:i[1])+`<small>${lock?"Étape "+i[4]:i[3]}</small>`;
+      b.innerHTML=(lock?"🔒":s=="aura"?`<i style="background:${i[1]}"></i>`:avatar(40,i))+`<small>${lock?"Étape "+i[4]:i[3]}</small>`;
       if(!lock)b.onclick=()=>{S.eq[s]=on?null:i[0];save();heroPage()};g.append(b)});
     c.append(g);app.append(c)});
-  app.append(H(`🖼️ Tu as un dessin ? Nomme-le <b>hero.png</b> (fond transparent) et place-le dans le dossier de l'application : il remplacera le personnage.`,"tr"));
   window.scrollTo(0,y);
 }
 // ===== Mentions légales

@@ -1,0 +1,6 @@
+Dossier des bonus du héros (PNG transparents, 512 x 512 px, même cadrage que hero.png)
+h1 Haut-de-forme | h2 Casquette | h3 Chapeau de diplômé | h4 Chapeau de cow-boy | h5 Couronne
+f1 Lunettes de soleil | f2 Lunettes d'explorateur | f3 Déguisement (nez, moustache, lunettes)
+o1 Parapluie | o2 Guitare | o3 Pile de livres | o4 Trophée
+p1 Chien | p2 Chat | p3 Renard | p4 Licorne
+Nom des fichiers : h1.png, h2.png, ... p4.png (exactement ces noms).
