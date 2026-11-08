@@ -1,6 +1,6 @@
-Dossier des bonus du héros (PNG transparents, 512 x 512 px, même cadrage que hero.png)
-h1 Haut-de-forme | h2 Casquette | h3 Chapeau de diplômé | h4 Chapeau de cow-boy | h5 Couronne
-f1 Lunettes de soleil | f2 Lunettes d'explorateur | f3 Déguisement (nez, moustache, lunettes)
-o1 Parapluie | o2 Guitare | o3 Pile de livres | o4 Trophée
-p1 Chien | p2 Chat | p3 Renard | p4 Licorne
-Nom des fichiers : h1.png, h2.png, ... p4.png (exactement ces noms).
+Bonus du héros : PNG transparents, 512 x 512 px, même cadrage que hero.png
+Chapeaux : h1 Haut de forme | h2 Chapeau de pirate | h3 Bonnet | h4 Couronne | h5 Perruque de clown | h6 Casquette
+Visage : v1 Cache-oeil | v2 Lunettes de soleil | v3 Moustache | v4 Nez rouge | v5 Barbe
+Vêtements : b1 Chemise | b2 T-shirt | b3 Tenue de clown | b4 Crochet de pirate | b5 Médaille | b6 Superman
+Chaussures : f1 Chaussures de clown | f2 Skateboard | f3 Basket | f4 Pot de fleurs | f5 Bottes
+Couleurs de fond : 5 couleurs, aucun fichier à fournir.

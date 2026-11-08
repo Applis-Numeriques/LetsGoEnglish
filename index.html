@@ -7,29 +7,29 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<meta name="theme-color" content="#ff6f59">
+<meta name="theme-color" content="#0D5A58">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Let's Go English">
 <style>
-:root{--bg:#fff7ee;--card:#fff;--ink:#2b2a4c;--mut:#7a7699;--coral:#ff6f59;--sun:#ffb703;--teal:#2ec4b6;--vio:#7c5cff;--ok:#2bb673;--ko:#ef476f;--line:#f1e4d6;--sh:0 8px 24px rgba(120,80,40,.13)}
-@media(prefers-color-scheme:dark){:root{--bg:#1e1a2e;--card:#2a2540;--ink:#fdf3e7;--mut:#b4aed0;--line:#3b3558;--sh:0 8px 24px rgba(0,0,0,.35)}}
+:root{--bg:#eef9f8;--card:#fff;--ink:#0b2f2e;--mut:#5d8482;--pri:#0D5A58;--sun:#FFC857;--teal:#44B2AF;--sec:#1f8280;--ok:#2bb673;--ko:#ef476f;--line:#d6ebea;--sh:0 8px 24px rgba(13,90,88,.15)}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1f1f;--card:#12302f;--ink:#e8fbfa;--mut:#8fb5b3;--pri:#1f8f8c;--sec:#2a9d9a;--line:#1f4a49;--sh:0 8px 24px rgba(0,0,0,.4)}#logo{background:linear-gradient(90deg,#44B2AF,#a6ece9);-webkit-background-clip:text;background-clip:text}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;font-family:ui-rounded,"Nunito","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding-bottom:calc(96px + env(safe-area-inset-bottom))}
 header{position:sticky;top:0;z-index:9;display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px)}
 #back{border:0;background:var(--card);color:var(--ink);width:42px;height:42px;border-radius:50%;font-size:1.5rem;box-shadow:var(--sh);cursor:pointer;visibility:hidden;flex:none}
-#logo{flex:1;margin:0;text-align:center;font-size:clamp(1.25rem,5.5vw,1.8rem);font-weight:900;white-space:nowrap;cursor:pointer;background:linear-gradient(90deg,var(--coral),var(--vio));-webkit-background-clip:text;background-clip:text;color:transparent}
+#logo{flex:1;margin:0;text-align:center;font-size:clamp(1.25rem,5.5vw,1.8rem);font-weight:900;white-space:nowrap;cursor:pointer;background:linear-gradient(90deg,var(--pri),#44B2AF);-webkit-background-clip:text;background-clip:text;color:transparent}
 #score{background:var(--sun);color:#3b2a00;font-weight:900;padding:8px 13px;border-radius:99px;box-shadow:var(--sh);flex:none}
 main{max-width:640px;margin:0 auto;padding:6px 16px}
 h2{margin:20px 0 10px;font-size:1.25rem}
-.hero-card{background:linear-gradient(135deg,var(--coral),#ff9a5a);color:#fff;border-radius:28px;padding:20px;box-shadow:var(--sh);display:flex;gap:16px;align-items:center;margin:8px 0 6px}
+.hero-card{background:linear-gradient(135deg,var(--pri),#2E8F8C);color:#fff;border-radius:28px;padding:20px;box-shadow:var(--sh);display:flex;gap:16px;align-items:center;margin:8px 0 6px}
 .hero-card h3{margin:0;font-size:1.25rem}.hero-card p{margin:2px 0 0;opacity:.95}
 .btn{border:0;border-radius:18px;padding:15px 20px;font:inherit;font-weight:800;cursor:pointer;background:var(--card);color:var(--ink);box-shadow:var(--sh);transition:transform .12s}
 .btn:active{transform:scale(.97)}
-.main{background:var(--coral);color:#fff;width:100%;margin-top:12px;font-size:1.05rem}
-.alt{background:var(--vio)}
+.main{background:var(--pri);color:#fff;width:100%;margin-top:12px;font-size:1.05rem}
+.alt{background:var(--sec)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.lv{color:#fff;text-align:left;padding:22px 16px;border-radius:26px;background:linear-gradient(135deg,var(--c),var(--c2));font-size:1.7rem;font-weight:900}
+.lv{color:#fff;text-align:center;padding:22px 16px;border-radius:26px;background:linear-gradient(135deg,var(--c),var(--c2));font-size:1.7rem;font-weight:900}
 .lv small{display:block;font-size:.85rem;font-weight:700;opacity:.92;margin-top:4px}
 .axe{display:flex;align-items:center;gap:14px;width:100%;text-align:left;margin-bottom:12px;padding:12px 16px}
 .axe .t{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;flex:none}
@@ -51,11 +51,11 @@ h2{margin:20px 0 10px;font-size:1.25rem}
 input[type=text]{font:inherit;padding:14px;border-radius:16px;border:2px solid var(--line);width:100%;margin:8px 0;background:var(--card);color:var(--ink)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;min-height:48px;padding:6px;border-radius:16px}
 .zone{border:2px dashed var(--line)}
-.chip{background:var(--vio);color:#fff;padding:10px 15px;border-radius:99px;border:0;font:inherit;font-weight:700;cursor:pointer}
+.chip{background:var(--sec);color:#fff;padding:10px 15px;border-radius:99px;border:0;font:inherit;font-weight:700;cursor:pointer}
 .msg{font-weight:800;margin-top:10px}.msg.ok{color:var(--ok)}.msg.ko{color:var(--ko)}
-.say{background:none;border:0;font:inherit;color:var(--vio);font-weight:800;cursor:pointer;padding:6px 0}
+.say{background:none;border:0;font:inherit;color:var(--sec);font-weight:800;cursor:pointer;padding:6px 0}
 .bar{height:12px;background:var(--line);border-radius:9px;overflow:hidden;margin:6px 0}
-.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),var(--coral));border-radius:9px;transition:width .4s}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),var(--pri));border-radius:9px;transition:width .4s}
 .big{text-align:center}.big .em{font-size:3.6rem}
 .gift{background:color-mix(in srgb,var(--sun) 25%,var(--card));border-radius:16px;padding:10px;margin:10px 0;font-weight:800}
 /* Avatar */
@@ -63,22 +63,23 @@ input[type=text]{font:inherit;padding:14px;border-radius:16px;border:2px solid v
 .av .b{font-size:1em;line-height:1}.av img.b{width:100%;height:100%;object-fit:contain}.av .ly{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .av .hat{position:absolute;top:-.3em;left:50%;transform:translateX(-50%);font-size:.55em;line-height:1}
 .av .fc{position:absolute;top:.52em;left:50%;transform:translateX(-50%);font-size:.42em;line-height:1}
+.av .cl{position:absolute;top:.8em;left:50%;transform:translateX(-50%);font-size:.5em;line-height:1}.av .sh{position:absolute;bottom:-.1em;left:50%;transform:translateX(-50%);font-size:.45em;line-height:1}
 .av .hd{position:absolute;right:-.25em;bottom:.05em;font-size:.55em;line-height:1}
 .av .pt{position:absolute;left:-.3em;bottom:0;font-size:.55em;line-height:1}
 .items{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:10px}
 .it{border:2px solid var(--line);background:var(--card);border-radius:16px;padding:10px 4px;font-size:1.8rem;text-align:center;cursor:pointer;color:var(--ink);font-family:inherit}
 .it small{display:block;font-size:.68rem;font-weight:700;color:var(--mut);line-height:1.1;margin-top:4px}
-.it.on{border-color:var(--coral);background:color-mix(in srgb,var(--coral) 14%,var(--card))}
+.it.on{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 14%,var(--card))}
 .it.lock{opacity:.5;cursor:default;filter:grayscale(1)}
 .it i{display:block;width:32px;height:32px;border-radius:50%;margin:0 auto;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
 /* Route */
 .road{display:flex;flex-direction:column-reverse;position:relative;padding:14px 0;margin:10px 0}
-.road::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:18px;margin-left:-9px;border-radius:9px;background:repeating-linear-gradient(180deg,#fff9 0 10px,transparent 10px 24px),#d9c3a8}
+.road::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:18px;margin-left:-9px;border-radius:9px;background:repeating-linear-gradient(180deg,#fff9 0 10px,transparent 10px 24px),#b9d3d2}
 .stop{display:grid;grid-template-columns:1fr 84px 1fr;align-items:center;margin:16px 0;position:relative}
 .nw{grid-column:2;grid-row:1;display:flex;justify-content:center;position:relative}
-.node{width:70px;height:70px;border-radius:50%;border:5px solid #fff;font-size:1.9rem;background:#d9c3a8;box-shadow:var(--sh);cursor:pointer}
+.node{width:70px;height:70px;border-radius:50%;border:5px solid #fff;font-size:1.9rem;background:#b9d3d2;box-shadow:var(--sh);cursor:pointer}
 .node.done{background:var(--sun)}
-.node.cur{background:var(--coral);animation:pulse 1.4s infinite}
+.node.cur{background:var(--pri);animation:pulse 1.4s infinite}
 .node.lock{filter:grayscale(1);opacity:.55;cursor:not-allowed}
 .lab{padding:0 10px;font-weight:900}.lab small{display:block;color:var(--mut);font-weight:700}
 .stop.r .lab{grid-column:3;grid-row:1}.stop.l .lab{grid-column:1;grid-row:1;text-align:right}
@@ -86,23 +87,38 @@ input[type=text]{font:inherit;padding:14px;border-radius:16px;border:2px solid v
 .hero.walk{animation:walk 1s ease-out,bob 1s 1s infinite}
 @keyframes bob{50%{transform:translateY(-6px)}}
 @keyframes walk{from{transform:translateY(120px);opacity:0}to{transform:none;opacity:1}}
-@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(255,111,89,.25)}}
+@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(13,90,88,.25)}}
 /* Navigation basse + pied de page */
 #tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;gap:6px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--card) 94%,transparent);backdrop-filter:blur(12px);box-shadow:0 -6px 20px rgba(0,0,0,.08)}
 #tabs button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-size:1.5rem;display:flex;flex-direction:column;align-items:center;padding:5px;border-radius:16px;cursor:pointer;line-height:1.2}
 #tabs button span{font-size:.72rem;font-weight:800}
-#tabs button.on{color:var(--coral);background:color-mix(in srgb,var(--coral) 13%,transparent)}
+#tabs button.on{color:var(--pri);background:color-mix(in srgb,var(--pri) 13%,transparent)}
 footer{max-width:640px;margin:18px auto 0;padding:0 16px;text-align:center;color:var(--mut);font-size:.8rem}
-footer a{color:var(--vio);font-weight:800;text-decoration:underline;cursor:pointer}
+footer a{color:var(--sec);font-weight:800;text-decoration:underline;cursor:pointer}
+.chip{touch-action:none;user-select:none;-webkit-user-select:none}.chip.sel{outline:3px solid var(--sun)}
+select{font:inherit;padding:13px;border-radius:16px;border:2px solid var(--line);width:100%;margin-top:8px;background:var(--card);color:var(--ink)}
+.vr{display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer}.vr .en{font-weight:800;flex:1}.vr .fr{color:var(--mut);flex:1}
+.hid .vr:not(.show) .fr{filter:blur(7px)}
+.vb{display:grid;grid-template-columns:repeat(3,1fr);gap:2px 8px;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer}.vb small{grid-column:1/-1;color:var(--mut)}
+.hid2 .vb:not(.show) .pp{filter:blur(7px)}
+.ct{border-collapse:collapse;width:100%;font-size:.92rem}.ct th,.ct td{padding:8px 7px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.ct tr:first-child th{color:var(--mut);font-size:.8rem}
+.kb{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:12px 0}.kbk{margin:0;padding:10px 0;text-align:center}.kbk:disabled{opacity:.55}
+.dz{display:flex;align-items:center;gap:10px;margin:8px 0}.dz b{flex:1}
+.slot{flex:1;min-height:52px;border:2px dashed var(--line);border-radius:14px;display:flex;align-items:center;justify-content:center;padding:4px}
+.slot.ok{border:2px solid var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}.slot.ko{border:2px solid var(--ko);background:color-mix(in srgb,var(--ko) 18%,var(--card))}
+.mem{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.mc{min-height:78px;border:0;border-radius:18px;background:linear-gradient(135deg,var(--pri),#44B2AF);color:#fff;font:inherit;font-weight:800;font-size:1.3rem;cursor:pointer;padding:6px}
+.mc.up{background:var(--card);color:var(--ink);box-shadow:var(--sh);font-size:1rem}.mc.done{background:color-mix(in srgb,var(--ok) 25%,var(--card));color:var(--ink);font-size:1rem}
+#tabs img{width:30px;height:30px;object-fit:contain}
 </style>
 </head>
 <body>
 <header><button id="back" aria-label="Retour">‹</button><h1 id="logo">Let's Go English !</h1><div id="score">⭐ 0</div></header>
 <main id="app"></main>
 <footer>© 2026 HENRY Clément – Tous droits réservés.<br>Application propriété de HENRY Clément · <a id="lg">Mentions légales</a></footer>
-<nav id="tabs"><button data-t="home">🏠<span>Accueil</span></button><button data-t="journey">🗺️<span>Aventure</span></button><button data-t="hero">🎒<span>Mon héros</span></button></nav>
+<nav id="tabs"><button data-t="home"><img src="icons/home.png" alt="" onerror="this.outerHTML='🏠'"><span>Accueil</span></button><button data-t="journey"><img src="icons/journey.png" alt="" onerror="this.outerHTML='🗺️'"><span>Aventure</span></button><button data-t="hero"><img src="icons/hero.png" alt="" onerror="this.outerHTML='🎒'"><span>Mon héros</span></button></nav>
 <script>
-const LV=["6ème","5ème","4ème","3ème"],CO=[["#2ec4b6","#1a9e8f"],["#ffb703","#fb8500"],["#ff6f59","#e63f66"],["#7c5cff","#4f46e5"]];
+const LV=["6ème","5ème","4ème","3ème"],CO=[["#44B2AF","#2a9d8f"],["#FFC857","#F4A300"],["#FF8A6B","#E4572E"],["#1E6FA8","#0D3B66"]];
 // Axe = [emoji, titre, leçon, à retenir (|), vocabulaire "en=fr;…", QCM [q,"a|b|c",index,traduction], trous [phrase,réponse(s),traduction], ordre [phrase,traduction]]
 const D=[[
 ["🧑","Personnes et personnages","Pour <b>se présenter</b> ou décrire quelqu'un, on utilise <b>be</b> (être) et <b>have</b> (avoir).<br><b>I am</b> eleven. <i>(J'ai onze ans.)</i> — <b>He is</b> British. <i>(Il est britannique.)</i><br><b>She has</b> black hair. <i>(Elle a les cheveux noirs.)</i><br>À la 3e personne du singulier (he / she / it), have devient <b>has</b> et les autres verbes prennent un <b>-s</b> : he lives, she likes.<br>Pour dire « à qui c'est », on ajoute <b>'s</b> : Harry's wand <i>(la baguette d'Harry)</i>.","I am / you are / he-she-it is|I have / he-she-it has|3e personne : verbe + -s (he lives)|'s = possession (Harry's friend)|Se présenter : My name is… I'm… I live in…","mother=mère;father=père;brother=frère;sister=sœur;cousin=cousin(e);hair=cheveux;tall=grand;funny=drôle",[["Harry ___ black hair.","have|has|haves",1,"Harry a les cheveux noirs."],["She ___ eleven years old.","am|is|are",1,"Elle a onze ans."],["This is ___ book.","Tom|Tom's|Toms",1,"C'est le livre de Tom."]],[["My name ___ Colin.","is","Je m'appelle Colin."],["He ___ a sister. (have)","has","Il a une sœur."],["I ___ French. (être)","am","Je suis français."]],[["She has two brothers","Elle a deux frères."],["My cousin lives in London","Mon cousin habite à Londres."]]],
@@ -137,13 +153,14 @@ const ALL=D.flatMap((a,l)=>a.map((_,i)=>[l,i]));
 const STOPS=[["🚉","Eurostar Station"],["🎡","London Eye"],["🕰️","Big Ben"],["🐉","Loch Ness"],["☘️","Dublin"],["⛰️","Cliffs of Moher"],["🗽","New York"],["🌆","Chicago"],["🏜️","Grand Canyon"],["🎬","Hollywood"],["🦘","Sydney"],["👑","Treasure Island"]];
 const TE=["🏋️","🧗","🚀","🌋","🏝️","🛶","🎪","🏰","🌌","🛰️"];
 const GR=["Rookie","Explorer","Adventurer","Hero","Champion","Legend"];
-// Bonus débloqués : [id, emoji ou couleur, emplacement, nom, étape à franchir]
-const ITEMS=[["h1","🎩","hat","Haut-de-forme",1],["h2","🧢","hat","Casquette",2],["h3","🎓","hat","Diplômé",4],["h4","🤠","hat","Cow-boy",6],["h5","👑","hat","Couronne",9],
-["f1","🕶️","face","Soleil",2],["f2","🥽","face","Explorateur",5],["f3","🥸","face","Déguisement",8],
-["o1","☂️","hand","Parapluie",3],["o2","🎸","hand","Guitare",5],["o3","📚","hand","Livres",7],["o4","🏆","hand","Trophée",10],
-["p1","🐶","pet","Chien",3],["p2","🐱","pet","Chat",6],["p3","🦊","pet","Renard",9],["p4","🦄","pet","Licorne",12],
-["a1","#ffd6a5","aura","Pêche",1],["a2","#bde0fe","aura","Ciel",4],["a3","#caffbf","aura","Menthe",7],["a4","#d0bfff","aura","Violet",11]];
-const SLOTS=[["hat","🎩 Chapeaux"],["face","😎 Lunettes"],["hand","🎒 Objets"],["pet","🐾 Compagnons"],["aura","🎨 Couleurs"]];
+// Bonus débloqués : [id, emoji (ou couleur), catégorie, nom, étape à franchir]
+const ITEMS=[
+["h6","🧢","hat","Casquette",1],["h3","🧶","hat","Bonnet",3],["h1","🎩","hat","Haut de forme",5],["h2","🏴‍☠️","hat","Chapeau de pirate",8],["h5","🎭","hat","Perruque de clown",11],["h4","👑","hat","Couronne",14],
+["v2","🕶️","face","Lunettes de soleil",1],["v3","🥸","face","Moustache",4],["v1","🩹","face","Cache-œil",7],["v5","🧔","face","Barbe",10],["v4","🔴","face","Nez rouge",13],
+["b2","👕","cloth","T-shirt",2],["b1","👔","cloth","Chemise",4],["b5","🏅","cloth","Médaille",6],["b4","🪝","cloth","Crochet de pirate",9],["b3","🤡","cloth","Tenue de clown",12],["b6","🦸","cloth","Superman",15],
+["f3","👟","shoes","Basket",2],["f5","🥾","shoes","Bottes",5],["f2","🛹","shoes","Skateboard",7],["f4","🪴","shoes","Pot de fleurs",10],["f1","👞","shoes","Chaussures de clown",13],
+["a1","#cdeeed","aura","Menthe",1],["a2","#bfe3ff","aura","Ciel",3],["a3","#ffe7a3","aura","Soleil",6],["a4","#ffd1cc","aura","Rose",9],["a5","#d9d0ff","aura","Lavande",12]];
+const SLOTS=[["hat","🎩 Chapeaux"],["face","😎 Visage"],["cloth","👕 Vêtements"],["shoes","👟 Chaussures"],["aura","🎨 Couleurs de fond"]];
 const LEGAL_CONTACT=""; // ex. "contact@exemple.fr" (facultatif)
 const info=k=>k<12?{e:STOPS[k][0],n:STOPS[k][1],lv:Math.floor(k/3),t:LV[Math.floor(k/3)]}:{e:TE[(k-12)%10],n:"Camp d'entraînement n°"+(k-11),lv:3,t:"Révisions 6ème → 3ème",train:1};
 // ===== Outils
@@ -152,20 +169,29 @@ const R=n=>Math.floor(Math.random()*n),sh=a=>a.map(v=>[Math.random(),v]).sort((x
 const nm=s=>s.toLowerCase().replace(/[’]/g,"'").replace(/[.!?,;:]/g,"").replace(/\s+/g," ").trim();
 const H=(h,c)=>{const d=document.createElement("div");if(c)d.className=c;d.innerHTML=h;return d};
 const h2=t=>Object.assign(document.createElement("h2"),{textContent:t});
-const say=t=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";speechSynthesis.speak(u)}catch(e){}};
+const say=(t,r)=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=r||.9;speechSynthesis.speak(u)}catch(e){}};
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+let HAS_TTS=!!(window.speechSynthesis&&window.SpeechSynthesisUtterance),HAS_SR=!!SR;
+const B=(t,c,f)=>{const b=document.createElement("button");b.className=c;b.textContent=t;b.onclick=f;return b};
+function listen(cb){let done=false;const f=(a,b)=>{if(!done){done=true;cb(a,b)}};
+  try{const r=new SR();r.lang="en-GB";r.maxAlternatives=3;r.interimResults=false;
+    r.onresult=ev=>f(null,[...ev.results[0]].map(x=>x.transcript));r.onerror=ev=>f(ev.error);r.onnomatch=()=>f("nomatch");r.onend=()=>f("no-speech");r.start();return r}catch(e){f("error")}}
+const lev=(a,b)=>{const m=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let p=m[0];m[0]=i;for(let j=1;j<=b.length;j++){const t=m[j];m[j]=Math.min(m[j]+1,m[j-1]+1,p+(a[i-1]==b[j-1]?0:1));p=t}}return m[b.length]};
+const sim=(a,b)=>1-lev(a,b)/Math.max(a.length,b.length,1);
 let S={pts:0,stage:0,done:{},best:{},eq:{}};
 try{Object.assign(S,JSON.parse(localStorage.getItem("ec2")||"{}"))}catch(e){}
 S.eq=S.eq||{};
 const save=()=>{try{localStorage.setItem("ec2",JSON.stringify(S))}catch(e){}};
 const upd=()=>{$("#score").textContent="⭐ "+S.pts};
+var TM=null;
 let backFn=null;
-const nav=(b,t)=>{backFn=b;$("#back").style.visibility=b?"visible":"hidden";app.innerHTML="";window.scrollTo(0,0);upd();document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x.dataset.t==t))};
+const nav=(b,t)=>{clearInterval(TM);backFn=b;$("#back").style.visibility=b?"visible":"hidden";app.innerHTML="";window.scrollTo(0,0);upd();document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x.dataset.t==t))};
 $("#back").onclick=()=>backFn&&backFn();$("#logo").onclick=home;
 // ===== Personnage (dessin hero.png si présent, sinon emoji) + bonus portés
-const worn=s=>ITEMS.find(i=>i[0]==S.eq[s]&&i[4]<=S.stage);
-const CL={hat:"hat",face:"fc",hand:"hd",pet:"pt"};
+const worn=s=>ITEMS.find(i=>i[2]==s&&i[0]==S.eq[s]&&i[4]<=S.stage);
+const CL={hat:"hat",face:"fc",cloth:"cl",shoes:"sh"};
 function avatar(px,only){
-  const au=only?null:worn("aura"),sl=only?[only]:["hat","face","hand","pet"].map(worn).filter(Boolean);
+  const au=only?null:worn("aura"),sl=only?[only]:["shoes","cloth","face","hat"].map(worn).filter(Boolean);
   const ly=sl.map(i=>`<img class="ly" src="items/${i[0]}.png" alt="" onerror="this.outerHTML='<span class=${CL[i[2]]}>${i[1]}</span>'">`).join("");
   return `<div class="av" style="font-size:${px}px;${au?"background:"+au[1]:""}"><img class="b" src="hero.png" alt="" onerror="this.outerHTML='<span class=b>🧒</span>'">${ly}</div>`;
 }
@@ -181,6 +207,11 @@ function gen(l,i){
   a[5].forEach(([q,o,k,tr])=>{const p=o.split("|"),c=p[k],s=sh(p);out.push({t:"q",q,o:s,a:s.indexOf(c),tr})});
   a[6].forEach(([q,an,tr])=>out.push({t:"f",q:"Complète : "+q,a:an.toLowerCase(),tr,sp:q.replace("___",an.split("|")[0])}));
   a[7].forEach(([s,tr])=>out.push({t:"o",a:s,tr,sp:s}));
+  if(S.oral!==false){
+    const w=sh(a[4].split(";").map(x=>x.split("="))).filter(x=>x[0].length>=4).slice(0,3);
+    if(HAS_TTS){w.forEach(([en,fr])=>out.push({t:"d",a:en,tr:fr}));a[7].forEach(([s,tr])=>out.push({t:"d",a:s,tr}))}
+    if(HAS_SR){w.forEach(([en,fr])=>out.push({t:"s",a:en,tr:fr}));a[7].forEach(([s,tr])=>out.push({t:"s",a:s,tr}))}
+  }
   return out;
 }
 // ===== Un exercice
@@ -197,6 +228,22 @@ function ask(c,e,cb){
     const i=document.createElement("input");i.type="text";i.placeholder="Ta réponse…";i.autocapitalize="off";i.autocomplete="off";i.spellcheck=false;
     const g=document.createElement("button");g.className="btn main";g.textContent="Valider";
     g.onclick=()=>{if(fin)return;end(e.a.split("|").includes(nm(i.value)),e.a.split("|")[0])};i.onkeydown=k=>{if(k.key=="Enter")g.click()};c.append(i,g);
+  }else if(e.t=="d"){
+    c.append(H("🎧 Écoute, puis écris ce que tu entends :","q"));
+    const row=H("","chips");row.append(B("🔊 Écouter","chip",()=>say(e.a)),B("🐢 Plus lent","chip",()=>say(e.a,.5)));c.append(row);
+    const i=document.createElement("input");i.type="text";i.placeholder="Écris en anglais…";i.autocapitalize="off";i.autocomplete="off";i.spellcheck=false;
+    const g=B("Valider","btn main",()=>{if(!fin)end(nm(i.value)==nm(e.a),e.a)});i.onkeydown=k=>{if(k.key=="Enter")g.click()};c.append(i,g);
+    setTimeout(()=>{if(!fin)say(e.a)},400);
+  }else if(e.t=="s"){
+    c.append(H("🎤 Dis à voix haute :","q"),H(`<b style="font-size:1.3rem">${e.a}</b>`,"q"),H("🇫🇷 "+e.tr,"tr"));
+    const hear=H("","tr");let tries=0,busy=false,rec=null;
+    const mic=B("🎙️ Parler","btn main",()=>{if(fin||busy)return;busy=true;mic.textContent="🎙️ Je t'écoute…";
+      rec=listen((err,alts)=>{busy=false;mic.textContent="🎙️ Parler";if(fin)return;
+        if(err){hear.textContent=err=="not-allowed"||err=="service-not-allowed"?"🎤 Micro bloqué : autorise-le dans ton navigateur, ou touche « Passer ».":err=="no-speech"||err=="nomatch"||err=="aborted"?"Je n'ai rien entendu, réessaie.":"Reconnaissance vocale indisponible ("+err+"). Touche « Passer ».";return}
+        const t=nm(e.a),th=e.a.includes(" ")?.85:.8;
+        if(alts.some(x=>sim(nm(x),t)>=th)){hear.textContent="";end(true,e.a)}
+        else{tries++;hear.textContent="J'ai entendu : « "+alts[0]+" »"+(tries>=3?"":". Essaie encore ("+tries+"/3).");if(tries>=3)end(false,e.a)}})});
+    c.append(B("🔊 Écouter le modèle","say",()=>say(e.a)),mic,hear,B("⏭ Passer","say",()=>{if(!fin){try{rec&&rec.abort()}catch(x){}end(false,e.a)}}));
   }else{
     c.append(H("Remets les mots dans l'ordre :","q"));c.append(H("🇫🇷 "+e.tr,"tr"));
     const z=H("","chips zone"),p=H("","chips");
@@ -226,6 +273,10 @@ function home(){
   const g=H("","grid");
   LV.forEach((l,k)=>{const n=Object.keys(S.done).filter(x=>x.startsWith(k+"-")).length,b=H(`${l}<small>${n} / ${D[k].length} thèmes réussis</small>`,"btn lv");b.style.setProperty("--c",CO[k][0]);b.style.setProperty("--c2",CO[k][1]);b.onclick=()=>level(k);g.append(b)});
   app.append(g);
+  app.append(h2("🧰 Outils et jeux"));const g2=H("","grid");
+  [["📖","Mon dico","Vocabulaire, verbes, conjugaison",dico,2],["🎮","Petits jeux","Pendu, memory, étiquettes…",games,1]].forEach(([e,n,d,f,k])=>{const b=H(`${e} ${n}<small>${d}</small>`,"btn lv");b.style.setProperty("--c",CO[k][0]);b.style.setProperty("--c2",CO[k][1]);b.style.fontSize="1.25rem";b.onclick=f;g2.append(b)});app.append(g2);
+  if(HAS_TTS||HAS_SR){const o=H(`<b>🎤 Exercices d'oral</b><p class="tr">Dictées audio et exercices où tu parles (micro). Tu peux les désactiver, par exemple en classe.</p>`,"card");
+    o.append(B(S.oral===false?"Activer l'oral":"Désactiver l'oral","btn main alt",()=>{S.oral=(S.oral===false);save();home()}));app.append(o)}
 }
 // ===== Niveau
 function level(l){
@@ -286,13 +337,158 @@ function heroPage(){
     c.append(g);app.append(c)});
   window.scrollTo(0,y);
 }
+// ===== Mon dico : vocabulaire, verbes irréguliers, conjugaison
+const TH=[
+["🌦️","Météo et saisons","sunny=ensoleillé;rainy=pluvieux;cloudy=nuageux;windy=venteux;snowy=neigeux;foggy=brumeux;stormy=orageux;hot=chaud;cold=froid;warm=doux, chaud;cool=frais;rain=pluie;snow=neige;wind=vent;sun=soleil;cloud=nuage;storm=orage;fog=brouillard;thunder=tonnerre;lightning=éclair;rainbow=arc-en-ciel;spring=printemps;summer=été;autumn=automne;winter=hiver"],
+["🎨","Couleurs","red=rouge;blue=bleu;green=vert;yellow=jaune;orange=orange;pink=rose;purple=violet;brown=marron;black=noir;white=blanc;grey=gris;gold=or, doré;silver=argent;light blue=bleu clair;dark green=vert foncé"],
+["🔢","Nombres","zero=zéro;one=un;two=deux;three=trois;four=quatre;five=cinq;six=six;seven=sept;eight=huit;nine=neuf;ten=dix;eleven=onze;twelve=douze;thirteen=treize;fourteen=quatorze;fifteen=quinze;sixteen=seize;seventeen=dix-sept;eighteen=dix-huit;nineteen=dix-neuf;twenty=vingt;thirty=trente;forty=quarante;fifty=cinquante;sixty=soixante;seventy=soixante-dix;eighty=quatre-vingts;ninety=quatre-vingt-dix;a hundred=cent;a thousand=mille;first=premier;second=deuxième;third=troisième"],
+["🧍","Parties du corps","head=tête;hair=cheveux;neck=cou;shoulder=épaule;arm=bras;elbow=coude;hand=main;finger=doigt;chest=poitrine;stomach=ventre;back=dos;leg=jambe;knee=genou;foot=pied;feet=pieds;toe=orteil;heart=cœur;skin=peau;bone=os"],
+["🙂","Le visage","face=visage;eye=œil;eyes=yeux;eyebrow=sourcil;ear=oreille;nose=nez;mouth=bouche;lips=lèvres;tooth=dent;teeth=dents;tongue=langue;cheek=joue;chin=menton;forehead=front;freckles=taches de rousseur;beard=barbe"],
+["😀","Émotions","happy=heureux;sad=triste;angry=en colère;surprised=surpris;scared=effrayé;tired=fatigué;bored=ennuyé;excited=enthousiaste;shy=timide;proud=fier;worried=inquiet;sleepy=somnolent;nervous=nerveux;jealous=jaloux"],
+["📅","Jours de la semaine","Monday=lundi;Tuesday=mardi;Wednesday=mercredi;Thursday=jeudi;Friday=vendredi;Saturday=samedi;Sunday=dimanche;today=aujourd'hui;tomorrow=demain;yesterday=hier;weekend=week-end"],
+["🗓️","Mois de l'année","January=janvier;February=février;March=mars;April=avril;May=mai;June=juin;July=juillet;August=août;September=septembre;October=octobre;November=novembre;December=décembre"],
+["⏰","Heure et temps","o'clock=heure pile;half past=et demie;quarter past=et quart;quarter to=moins le quart;morning=matin;afternoon=après-midi;evening=soir;night=nuit;noon=midi;midnight=minuit;hour=heure;minute=minute;week=semaine;month=mois;year=année"],
+["👨‍👩‍👧","Famille","mother=mère;father=père;parents=parents;brother=frère;sister=sœur;grandmother=grand-mère;grandfather=grand-père;uncle=oncle;aunt=tante;cousin=cousin(e);son=fils;daughter=fille;husband=mari;wife=épouse;baby=bébé;twins=jumeaux"],
+["👕","Vêtements","shirt=chemise;t-shirt=tee-shirt;trousers=pantalon;jeans=jean;skirt=jupe;dress=robe;jumper=pull;coat=manteau;jacket=veste;shoes=chaussures;boots=bottes;socks=chaussettes;hat=chapeau;cap=casquette;scarf=écharpe;gloves=gants;uniform=uniforme"],
+["🍎","Nourriture","bread=pain;butter=beurre;cheese=fromage;egg=œuf;milk=lait;water=eau;apple=pomme;banana=banane;strawberry=fraise;tomato=tomate;potato=pomme de terre;chicken=poulet;fish=poisson;rice=riz;pasta=pâtes;cake=gâteau;chocolate=chocolat;breakfast=petit-déjeuner;dinner=dîner"],
+["🏫","École","teacher=professeur;pupil=élève;classroom=salle de classe;desk=bureau;board=tableau;book=livre;notebook=cahier;pen=stylo;pencil=crayon;rubber=gomme;ruler=règle;bag=sac;lesson=cours;homework=devoirs;maths=maths;history=histoire;geography=géographie;science=sciences;break=récréation"],
+["🏠","Maison","house=maison;flat=appartement;kitchen=cuisine;bedroom=chambre;bathroom=salle de bain;living room=salon;garden=jardin;door=porte;window=fenêtre;table=table;chair=chaise;bed=lit;sofa=canapé;stairs=escalier;roof=toit"],
+["🐶","Animaux","dog=chien;cat=chat;horse=cheval;cow=vache;pig=cochon;sheep=mouton;rabbit=lapin;mouse=souris;bird=oiseau;lion=lion;tiger=tigre;elephant=éléphant;monkey=singe;snake=serpent;bear=ours;wolf=loup;fox=renard;frog=grenouille"],
+["👩‍⚕️","Métiers","doctor=médecin;nurse=infirmier(ère);police officer=policier;firefighter=pompier;farmer=agriculteur;baker=boulanger;cook=cuisinier;engineer=ingénieur;pilot=pilote;driver=chauffeur;actor=acteur;singer=chanteur;dentist=dentiste;vet=vétérinaire;artist=artiste;shop assistant=vendeur(se)"],
+["🏙️","Lieux en ville","town=ville;street=rue;school=école;library=bibliothèque;supermarket=supermarché;bakery=boulangerie;post office=bureau de poste;hospital=hôpital;station=gare;airport=aéroport;park=parc;museum=musée;cinema=cinéma;bank=banque;bridge=pont;church=église"],
+["🚌","Transports","car=voiture;bus=bus;coach=autocar;train=train;plane=avion;boat=bateau;bike=vélo;underground=métro;taxi=taxi;ticket=billet;journey=voyage;luggage=bagages"],
+["⚽","Sports et loisirs","football=football;basketball=basket;tennis=tennis;swimming=natation;rugby=rugby;cricket=cricket;running=course;cycling=cyclisme;dancing=danse;reading=lecture;drawing=dessin;cooking=cuisine;music=musique;video games=jeux vidéo;chess=échecs"]];
+const VB="be|was / were|been|être;become|became|become|devenir;begin|began|begun|commencer;break|broke|broken|casser;bring|brought|brought|apporter;build|built|built|construire;buy|bought|bought|acheter;catch|caught|caught|attraper;choose|chose|chosen|choisir;come|came|come|venir;cost|cost|cost|coûter;cut|cut|cut|couper;do|did|done|faire;draw|drew|drawn|dessiner;drink|drank|drunk|boire;drive|drove|driven|conduire;eat|ate|eaten|manger;fall|fell|fallen|tomber;feel|felt|felt|ressentir;fight|fought|fought|se battre;find|found|found|trouver;fly|flew|flown|voler (dans les airs);forget|forgot|forgotten|oublier;get|got|got|obtenir, devenir;give|gave|given|donner;go|went|gone|aller;grow|grew|grown|grandir, pousser;have|had|had|avoir;hear|heard|heard|entendre;hide|hid|hidden|cacher;hit|hit|hit|frapper;hold|held|held|tenir;hurt|hurt|hurt|faire mal;keep|kept|kept|garder;know|knew|known|savoir, connaître;learn|learnt / learned|learnt / learned|apprendre;leave|left|left|partir, quitter;lend|lent|lent|prêter;let|let|let|laisser;lose|lost|lost|perdre;make|made|made|fabriquer, faire;mean|meant|meant|signifier;meet|met|met|rencontrer;pay|paid|paid|payer;put|put|put|poser, mettre;read|read|read|lire;ride|rode|ridden|monter (à cheval, vélo);ring|rang|rung|sonner;run|ran|run|courir;say|said|said|dire;see|saw|seen|voir;sell|sold|sold|vendre;send|sent|sent|envoyer;sing|sang|sung|chanter;sit|sat|sat|s'asseoir;sleep|slept|slept|dormir;speak|spoke|spoken|parler;spend|spent|spent|dépenser, passer (temps);stand|stood|stood|être debout;swim|swam|swum|nager;take|took|taken|prendre;teach|taught|taught|enseigner;tell|told|told|dire, raconter;think|thought|thought|penser;throw|threw|thrown|lancer;understand|understood|understood|comprendre;wake|woke|woken|se réveiller;wear|wore|worn|porter (vêtement);win|won|won|gagner;write|wrote|written|écrire";
+const CJ=[
+["👤 Les pronoms",["Sujet","En français","Complément","Possessif"],[["I","je","me","my"],["you","tu / vous","you","your"],["he","il","him","his"],["she","elle","her","her"],["it","il / elle (chose, animal)","it","its"],["we","nous","us","our"],["they","ils / elles","them","their"]],"Le sujet fait l'action (I like). Le complément la reçoit (he likes me)."],
+["🔵 be (être)",["Sujet","Présent","Prétérit","Négatif"],[["I","am","was","I'm not"],["you","are","were","aren't"],["he / she / it","is","was","isn't"],["we","are","were","aren't"],["they","are","were","aren't"]],"Question : on inverse. Are you tired ? Is she here ? Was he late ?"],
+["🟢 have (avoir)",["Sujet","Présent","Prétérit","Négatif"],[["I","have","had","haven't"],["you","have","had","haven't"],["he / she / it","has","had","hasn't"],["we","have","had","haven't"],["they","have","had","haven't"]],"Au Royaume-Uni on dit aussi « have got » : I've got a dog."],
+["🟣 do (auxiliaire)",["Sujet","Présent","Prétérit","Négatif"],[["I / you / we / they","do","did","don't / didn't"],["he / she / it","does","did","doesn't / didn't"]],"do sert à former les négations et les questions : Do you like it ? I didn't go."],
+["🟠 Présent simple (play)",["Sujet","Affirmatif","Négatif","Question"],[["I","I play","I don't play","Do I play ?"],["you","you play","you don't play","Do you play ?"],["he / she / it","he plays","he doesn't play","Does he play ?"],["we","we play","we don't play","Do we play ?"],["they","they play","they don't play","Do they play ?"]],"3e personne : on ajoute -s (-es après s, sh, ch, x, o : goes, watches). Avec does / doesn't, le verbe reste sans -s."],
+["🔴 Présent continu (be + -ing)",["Sujet","Affirmatif","Négatif","Question"],[["I","I am playing","I'm not playing","Am I playing ?"],["you / we / they","you are playing","you aren't playing","Are you playing ?"],["he / she / it","he is playing","he isn't playing","Is he playing ?"]],"Pour une action en cours (I'm reading) ou un projet proche (I'm leaving tomorrow)."],
+["🟤 Prétérit",["Forme","Réguliers","Irréguliers","Négatif / Question"],[["Toutes les personnes","played","went","didn't + base / Did + sujet + base ?"],["Exemples","I watched TV.","She saw a film.","He didn't see it. Did you see it ?"]],"Réguliers : verbe + -ed. Irréguliers : à apprendre (voir la liste des verbes). Pour une action terminée dans le passé."],
+["🟡 Present perfect",["Sujet","Affirmatif","Négatif","Question"],[["I","I have played","I haven't played","Have I played ?"],["you / we / they","you have played","you haven't played","Have you played ?"],["he / she / it","he has played","he hasn't played","Has he played ?"]],"have / has + participe passé. Mots-clés : ever, never, for, since, already."],
+["🔮 Le futur",["Forme","Exemple","Sens"],[["will + base","I will play (I'll play)","décision, prévision"],["won't + base","I won't play","futur négatif"],["be going to + base","I'm going to play","projet proche, intention"]],"Question : Will you come ? Are you going to come ?"],
+["💪 Les modaux",["Modal","Sens","Exemple"],[["can","pouvoir, savoir","I can swim."],["could","pouvais, pourrais","Could you help me ?"],["must","devoir (obligation)","You must be on time."],["mustn't","interdit","You mustn't run."],["should","devrait (conseil)","You should sleep more."],["may","permission, possibilité","May I come in ?"],["might","peut-être","It might rain."],["would","conditionnel","I would like a tea."]],"Après un modal : le verbe de base, sans to et sans -s (she can swim)."],
+["🔀 Les phrases avec if",["Type","Forme","Exemple"],[["possible","If + présent, will + base","If it rains, I will stay home."],["imaginaire","If + prétérit, would + base","If I were rich, I would travel."],["regret (B1+)","I wish + prétérit","I wish I had more time."]],"Avec be, on dit souvent « were » : If I were you…"],
+["🧱 Le passif (be + participe passé)",["Temps","Forme","Exemple"],[["présent","is / are + p.p.","English is spoken here."],["prétérit","was / were + p.p.","The book was written in 1900."],["futur","will be + p.p.","It will be finished soon."],["present perfect","has / have been + p.p.","It has been done."]],"On met en valeur ce qui subit l'action. by + agent si besoin : painted by Picasso."],
+["💬 Le discours rapporté",["Direct","Rapporté (passé)","Exemple"],[["am / is / are","was / were","« I am tired » → He said he was tired."],["présent simple","prétérit","« I like it » → She said she liked it."],["will / can","would / could","« I will come » → He said he would come."],["question","if / why + sujet + verbe","« Do you like it ? » → She asked if I liked it."]],"On « recule » d'un temps quand le verbe d'introduction est au passé."]];
+const pairs=s=>s.split(";").map(x=>x.split("="));
+let gt=-1;
+const gp=()=>gt<0?[...TH.flatMap(t=>pairs(t[2])),...D.flat().flatMap(a=>pairs(a[4]))]:pairs(TH[gt][2]);
+const addPts=n=>{S.pts+=n;save();upd()};
+function dico(){
+  nav(home,"home");app.append(h2("📖 Mon dico"));
+  [["🔤","Vocabulaire","Météo, couleurs, nombres, corps, jours, mois…",vocab],["🔁","Verbes irréguliers","Base · prétérit · participe passé",verbes],["🧩","Conjugaison","Pronoms, être, avoir, temps, modaux…",conj]].forEach(([e,t,d,f])=>{
+    const b=H(`<span class="t" style="background:#0D5A5826">${e}</span><span><b>${t}</b><small>${d}</small></span>`,"btn axe");b.onclick=f;app.append(b)});
+}
+function vocab(){
+  nav(dico,"home");app.append(h2("🔤 Vocabulaire"));const g=H("","grid");
+  TH.forEach((t,k)=>{const b=H(`${t[0]}<small>${t[1]} · ${pairs(t[2]).length} mots</small>`,"btn lv");b.style.setProperty("--c",CO[k%4][0]);b.style.setProperty("--c2",CO[k%4][1]);b.style.fontSize="2rem";b.onclick=()=>theme(k);g.append(b)});
+  app.append(g);
+}
+function theme(k){
+  nav(vocab,"home");const t=TH[k],c=H(`<h3>${t[0]} ${t[1]}</h3><small class="tr">Touche un mot pour l'écouter 🔊</small>`,"card"),list=H("");let hid=false;
+  const tg=B("🙈 Cacher les traductions (auto-test)","btn main alt",()=>{hid=!hid;list.classList.toggle("hid",hid);tg.textContent=hid?"👀 Montrer les traductions":"🙈 Cacher les traductions (auto-test)"});
+  pairs(t[2]).forEach(([en,fr])=>{const r=H(`<span class="en">${en}</span><span class="fr">${fr}</span><span>🔊</span>`,"vr");r.onclick=()=>{say(en);r.classList.add("show")};list.append(r)});
+  c.append(tg,list);app.append(c);
+  app.append(B("🎮 Jouer avec ce thème","btn main",()=>{gt=k;games()}));
+}
+function verbes(){
+  nav(dico,"home");app.append(h2("🔁 Verbes irréguliers"));
+  const c=H("","card"),f=document.createElement("input"),list=H("");f.type="text";f.placeholder="Chercher (ex. go, aller)…";let hid=false;
+  const hd=B("🙈 Cacher prétérit et participe (auto-test)","btn main alt",()=>{hid=!hid;list.classList.toggle("hid2",hid);hd.textContent=hid?"👀 Tout montrer":"🙈 Cacher prétérit et participe (auto-test)"});
+  const rows=VB.split(";").map(x=>x.split("|"));
+  const draw=()=>{list.innerHTML="";const q=nm(f.value||"");rows.filter(r=>!q||nm(r.join(" ")).includes(q)).forEach(([b,p,pp,fr])=>{const r=H(`<b>${b}</b><span class="pp">${p}</span><span class="pp">${pp}</span><small>${fr}</small>`,"vb");r.onclick=()=>{say(b+", "+p.split(" / ")[0]+", "+pp.split(" / ")[0],.7);r.classList.add("show")};list.append(r)})};
+  f.oninput=draw;draw();
+  c.append(H(`<small class="tr">${rows.length} verbes · touche une ligne pour l'écouter 🔊</small>`),f,hd,H(`<div class="vb" style="font-weight:900"><span>Base</span><span>Prétérit</span><span>Participe passé</span></div>`),list);app.append(c);
+}
+function conj(){
+  nav(dico,"home");app.append(h2("🧩 Conjugaison"));
+  CJ.forEach(([t,cols,rows,note])=>{
+    const c=H(`<h3>${t}</h3><div style="overflow-x:auto"><table class="ct"><tr>${cols.map(x=>"<th>"+x+"</th>").join("")}</tr>${rows.map(r=>"<tr>"+r.map((x,i)=>i?"<td>"+x+"</td>":"<th>"+x+"</th>").join("")+"</tr>").join("")}</table></div>${note?`<p class="tr">${note}</p>`:""}`,"card");app.append(c)});
+}
+// ===== Petits jeux
+function games(){
+  nav(home,"home");app.append(h2("🎮 Petits jeux"));
+  const c=H(`<b>Thème des mots</b>`,"card"),sel=document.createElement("select");
+  sel.innerHTML=`<option value="-1">🎲 Tous les thèmes</option>`+TH.map((t,k)=>`<option value="${k}">${t[0]} ${t[1]}</option>`).join("");sel.value=gt;sel.onchange=()=>{gt=+sel.value};c.append(sel);app.append(c);
+  [["🔤","Le pendu","Devine le mot lettre par lettre",pendu],["🏷️","Glisse les étiquettes","Place chaque mot en face de sa traduction",etiq],["🃏","Memory","Retrouve les paires mot / traduction",memory],["🔀","Mots mélangés","Remets les lettres dans l'ordre",anagr],["⚡","Défi chrono","45 secondes : un maximum de bonnes réponses",chrono]].forEach(([e,t,d,f])=>{
+    const b=H(`<span class="t" style="background:#44B2AF40">${e}</span><span><b>${t}</b><small>${d}</small></span>`,"btn axe");b.onclick=f;app.append(b)});
+}
+const uniq=n=>{const seen=new Set(),P=[];sh(gp()).forEach(p=>{if(P.length<n&&!seen.has(p[0])&&!seen.has(p[1])&&p[0].length<=14&&p[1].length<=22){seen.add(p[0]);seen.add(p[1]);P.push(p)}});return P};
+function pendu(){
+  nav(games,"home");
+  const P=gp().filter(([e])=>/^[a-z]+$/i.test(e)&&e.length>=3&&e.length<=12),[en,fr]=P[R(P.length)],w=en.toLowerCase(),found=new Set(),M=7;let bad=0,over=false;
+  const box=H(""),hang=H(""),wd=H(""),kb=H("","kb"),msg=H("","msg");
+  app.append(box);box.append(H(`<b>Le pendu</b><small class="tr">🇫🇷 Indice : ${fr}</small>`),hang,wd,kb,msg);
+  const parts=['<line x1="10" y1="110" x2="70" y2="110"/>','<line x1="30" y1="110" x2="30" y2="10"/>','<line x1="30" y1="10" x2="85" y2="10"/><line x1="85" y1="10" x2="85" y2="24"/>','<circle cx="85" cy="32" r="8"/>','<line x1="85" y1="40" x2="85" y2="75"/>','<line x1="68" y1="55" x2="102" y2="55"/>','<line x1="85" y1="75" x2="72" y2="98"/><line x1="85" y1="75" x2="98" y2="98"/>'];
+  const draw=()=>{hang.innerHTML=`<svg viewBox="0 0 120 120" width="150" height="150" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" style="display:block;margin:auto">${parts.slice(0,bad).join("")}</svg>`;
+    wd.innerHTML=`<div style="text-align:center;font-size:2rem;letter-spacing:.3em;font-weight:900">${[...w].map(l=>found.has(l)||over?l:"_").join(" ")}</div><p class="tr" style="text-align:center">${M-bad} erreur(s) possible(s)</p>`};
+  const end=win=>{msg.className="msg "+(win?"ok":"ko");msg.textContent=win?"🎉 Bravo ! +10 points":"💀 Perdu ! Le mot était : "+w;msg.append(document.createElement("br"),B("🔊 Écouter","say",()=>say(w)));box.append(B("Mot suivant ➜","btn main",pendu))};
+  "abcdefghijklmnopqrstuvwxyz".split("").forEach(l=>{const b=B(l.toUpperCase(),"opt kbk",()=>{if(over||b.disabled)return;b.disabled=true;
+    if(w.includes(l)){found.add(l);b.classList.add("ok")}else{bad++;b.classList.add("ko")}
+    if([...w].every(x=>found.has(x))){over=true;addPts(10);end(true)}else if(bad>=M){over=true;end(false)}draw()});kb.append(b)});
+  draw();
+}
+function etiq(){
+  nav(games,"home");
+  const P=uniq(6),box=H(""),rows=H(""),pool=H("","chips"),msg=H("","msg"),slots=[];let sel=null,won=false;
+  app.append(box);box.append(H(`<b>Glisse chaque mot anglais en face de sa traduction</b><small class="tr">Ou touche un mot, puis touche la case. Touche un mot placé pour le reprendre.</small>`),rows,pool,msg);
+  const put=(c,s)=>{if(s.firstChild&&s.firstChild!=c)pool.append(s.firstChild);s.append(c)};
+  P.forEach(([en,fr])=>{const s=H("","slot"),r=H(`<b>${fr}</b>`,"dz");s.dataset.a=en;slots.push(s);r.append(s);rows.append(r);
+    s.onclick=()=>{if(sel&&!s.classList.contains("ok")){put(sel,s);sel.classList.remove("sel");sel=null}}});
+  const drag=c=>{c.onpointerdown=e=>{if(c.style.pointerEvents=="none")return;e.preventDefault();const sx=e.clientX,sy=e.clientY;let mv=false,gh=null;
+    const m=ev=>{if(!mv){if(Math.hypot(ev.clientX-sx,ev.clientY-sy)<8)return;mv=true;gh=c.cloneNode(true);gh.style.cssText="position:fixed;z-index:99;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.3)";document.body.append(gh);c.style.opacity=.3}gh.style.left=ev.clientX-30+"px";gh.style.top=ev.clientY-22+"px"};
+    const u=ev=>{removeEventListener("pointermove",m);removeEventListener("pointerup",u);removeEventListener("pointercancel",u);
+      if(mv){gh.remove();c.style.opacity=1;const t=document.elementFromPoint(ev.clientX,ev.clientY),s=t&&t.closest(".slot");if(s&&!s.classList.contains("ok"))put(c,s);else if(t&&t.closest(".chips")==pool)pool.append(c)}
+      else if(c.parentNode.classList.contains("slot"))pool.append(c);
+      else{if(sel)sel.classList.remove("sel");sel=sel==c?null:c;if(sel)c.classList.add("sel")}};
+    addEventListener("pointermove",m);addEventListener("pointerup",u);addEventListener("pointercancel",u)}};
+  sh(P.map(p=>p[0])).forEach(en=>{const c=document.createElement("button");c.className="chip";c.textContent=en;drag(c);pool.append(c)});
+  box.append(B("✅ Vérifier","btn main",()=>{if(won)return;let n=0;
+    slots.forEach(s=>{const c=s.firstChild;if(!c)return;if(c.textContent==s.dataset.a){s.classList.add("ok");c.style.pointerEvents="none";n++}else{s.classList.add("ko");pool.append(c);setTimeout(()=>s.classList.remove("ko"),900)}});
+    msg.className="msg "+(n==P.length?"ok":"ko");
+    if(n==P.length){won=true;addPts(15);msg.textContent="🎉 Tout est bon ! +15 points";box.append(B("Rejouer ➜","btn main",etiq))}else msg.textContent=n+" / "+P.length+" bien placés. Corrige les cases rouges !"}));
+}
+function memory(){
+  nav(games,"home");
+  const P=uniq(6),cards=sh(P.flatMap(([en,fr],i)=>[{i,t:en,l:"en"},{i,t:fr,l:"fr"}])),box=H(""),g=H("","mem");let open=[],moves=0,found=0,lock=false;
+  app.append(box);box.append(H(`<b>Memory : retrouve les paires (mot anglais + traduction)</b>`),g);
+  cards.forEach(c=>{const b=document.createElement("button");b.className="mc";b.textContent="❓";g.append(b);
+    b.onclick=()=>{if(lock||b.classList.contains("up")||b.classList.contains("done"))return;b.classList.add("up");b.textContent=c.t;if(c.l=="en")say(c.t);open.push([b,c]);
+      if(open.length==2){moves++;const [[b1,c1],[b2,c2]]=open;open=[];
+        if(c1.i==c2.i&&c1.l!=c2.l){b1.classList.add("done");b2.classList.add("done");found++;
+          if(found==P.length){const p=Math.max(5,30-2*moves);addPts(p);box.append(H(`<div class="em">🎉</div><h3>Bravo ! ${moves} coups</h3><p>+${p} points</p>`,"card big"),B("Rejouer ➜","btn main",memory))}}
+        else{lock=true;setTimeout(()=>{[b1,b2].forEach(x=>{x.classList.remove("up");x.textContent="❓"});lock=false},900)}}}});
+}
+function anagr(){
+  nav(games,"home");
+  const P=gp().filter(([e])=>/^[a-z]+$/i.test(e)&&e.length>=4&&e.length<=10),[en,fr]=P[R(P.length)],w=en.toLowerCase();let L=sh([...w]);if(L.join("")==w)L=sh(L);
+  const box=H(""),zone=H("","chips zone"),pool=H("","chips"),msg=H("","msg");let done=false;
+  app.append(box);box.append(H(`<b>Remets les lettres dans l'ordre</b><small class="tr">🇫🇷 ${fr}</small>`),zone,pool,msg);
+  const chk=()=>{if(zone.children.length!=w.length){msg.textContent="";return}
+    if([...zone.children].map(x=>x.textContent).join("").toLowerCase()==w){done=true;addPts(5);msg.className="msg ok";msg.textContent="🎉 "+w+" ! +5 points";msg.append(document.createElement("br"),B("🔊 Écouter","say",()=>say(w)));box.append(B("Mot suivant ➜","btn main",anagr))}
+    else{msg.className="msg ko";msg.textContent="Pas tout à fait… retire des lettres et réessaie."}};
+  L.forEach(l=>{const c=B(l.toUpperCase(),"chip",()=>{if(done)return;(c.parentNode==pool?zone:pool).append(c);chk()});pool.append(c)});
+}
+function chrono(){
+  nav(games,"home");
+  const P=gp().filter(p=>p[0].length<=16&&p[1].length<=24),box=H(""),top=H("","card"),q=H("");let score=0,t=45;
+  app.append(box);box.append(top,q);
+  const hud=()=>{top.innerHTML=`<b>⚡ ${t} s</b> · Score : ${score}<div class="bar"><i style="width:${t/45*100}%"></i></div>`};
+  const next=()=>{q.innerHTML="";const c=P[R(P.length)],m=R(2),o=sh([c,...sh(P.filter(p=>p[0]!=c[0]&&p[1]!=c[1])).slice(0,3)]),card=H(`<div class="q"><b>${m?c[1]:c[0]}</b></div><small class="tr">${m?"Comment dit-on en anglais ?":"Que veut dire ce mot ?"}</small>`,"card");
+    o.forEach(p=>card.append(B(m?p[0]:p[1],"opt",()=>{if(t>0){if(p==c)score++;hud();next()}})));q.append(card)};
+  hud();next();
+  TM=setInterval(()=>{t--;hud();if(t<=0){clearInterval(TM);const p=score*2;addPts(p);box.innerHTML="";box.append(H(`<div class="em">⚡</div><h3>${score} bonnes réponses</h3><p>+${p} points</p>`,"card big"),B("Rejouer ➜","btn main",chrono),B("Retour aux jeux","btn main alt",games))}},1000);
+}
 // ===== Mentions légales
 function legal(){
   nav(()=>home(),"home");
   app.append(H(`<h3>Mentions légales</h3>
 <p><b>Éditeur et propriétaire :</b> HENRY Clément.</p>
 <p><b>Propriété intellectuelle :</b> l'application « Let's Go English ! » (nom, code, textes, exercices, illustrations et organisation du contenu) est la propriété exclusive de HENRY Clément. Toute reproduction, représentation, modification, adaptation ou diffusion, totale ou partielle, sans autorisation écrite préalable de l'auteur est interdite.</p>
-<p><b>Données personnelles :</b> l'application ne collecte aucune donnée personnelle, n'utilise ni cookie de suivi ni publicité. Les points, la progression et les bonus du héros sont enregistrés uniquement sur l'appareil de l'utilisateur ; ils disparaissent si les données du navigateur sont effacées.</p>
+<p><b>Données personnelles :</b> l'application ne collecte aucune donnée personnelle, n'utilise ni cookie de suivi ni publicité. Les points, la progression et les bonus du héros sont enregistrés uniquement sur l'appareil de l'utilisateur ; ils disparaissent si les données du navigateur sont effacées. Les exercices de prononciation utilisent la reconnaissance vocale du navigateur : selon l'appareil, le son peut être traité par le fournisseur du navigateur (Google, Apple…). L'application elle-même n'enregistre ni ne conserve aucune voix. Ces exercices peuvent être désactivés depuis l'accueil.</p>
 <p><b>Contenu pédagogique :</b> les exercices s'appuient sur le programme d'anglais des classes de collège.</p>
 ${LEGAL_CONTACT?`<p><b>Contact :</b> ${LEGAL_CONTACT}</p>`:""}
 <p class="tr">© 2026 HENRY Clément – Tous droits réservés.</p>`,"card"));
