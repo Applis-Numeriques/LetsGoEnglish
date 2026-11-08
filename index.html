@@ -528,7 +528,7 @@ function legal(){
   app.append(H(`<h3>Mentions légales</h3>
 <p><b>Éditeur et propriétaire :</b> HENRY Clément.</p>
 <p><b>Propriété intellectuelle :</b> l'application « Let's Go English ! » (nom, code, textes, exercices, illustrations et organisation du contenu) est la propriété exclusive de HENRY Clément. Toute reproduction, représentation, modification, adaptation ou diffusion, totale ou partielle, sans autorisation écrite préalable de l'auteur est interdite.</p>
-<p><b>Données personnelles :</b> l'application ne collecte aucune donnée personnelle, n'utilise ni cookie de suivi ni publicité. Les points, la progression et les bonus du héros sont enregistrés uniquement sur l'appareil de l'utilisateur ; ils disparaissent si les données du navigateur sont effacées. Les exercices de prononciation utilisent la reconnaissance vocale du navigateur : selon l'appareil, le son peut être traité par le fournisseur du navigateur (Google, Apple…). L'application elle-même n'enregistre ni ne conserve aucune voix. Ces exercices peuvent être désactivés depuis l'accueil.</p>
+<p><b>Données personnelles :</b> l'application ne demande aucune donnée personnelle (nom, e-mail…) et n'utilise ni cookie ni publicité. Elle mesure seulement son audience de façon anonyme (nombre de visites, pays, type d'appareil) avec le service GoatCounter, sans cookie et sans suivi individuel des utilisateurs. Les points, la progression et les bonus du héros sont enregistrés uniquement sur l'appareil de l'utilisateur ; ils disparaissent si les données du navigateur sont effacées. Les exercices de prononciation utilisent la reconnaissance vocale du navigateur : selon l'appareil, le son peut être traité par le fournisseur du navigateur (Google, Apple…). L'application elle-même n'enregistre ni ne conserve aucune voix. Ces exercices peuvent être désactivés depuis l'accueil.</p>
 <p><b>Contenu pédagogique :</b> les exercices s'appuient sur le programme d'anglais des classes de collège.</p>
 ${LEGAL_CONTACT?`<p><b>Contact :</b> ${LEGAL_CONTACT}</p>`:""}
 <p class="tr">© 2026 HENRY Clément – Tous droits réservés.</p>`,"card"));
@@ -543,5 +543,6 @@ let pend=2,booted=false;const boot=()=>{if(!booted){booted=true;home()}},chk=()=
 if(typeof Image=="undefined")boot();else{[1,2].forEach(i=>{const im=new Image();im.onload=()=>{HERO_OK[i]=1;chk()};im.onerror=chk;im.src=HF[i]});setTimeout(boot,1500)}
 if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
+<script data-goatcounter="https://applis-numeriques.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
