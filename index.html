@@ -131,13 +131,17 @@ body.desk .items{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
 body.desk .btn:hover,body.desk .opt:hover,body.desk .it:hover{transform:translateY(-2px)}
 body.desk .hero-card{padding:28px}
 body.desk #toast{left:132px}
+.fg{display:flex;align-items:center;gap:12px;padding:10px 4px;border-bottom:1px solid var(--line)}
+.fg .fl{width:56px;height:42px;border-radius:6px;object-fit:cover;box-shadow:0 0 0 1px var(--line);flex:none;background:var(--line);display:grid;place-items:center;font-size:1.2rem}
+.fg .nm{flex:1;line-height:1.25}.fg .nm small{display:block;color:var(--mut)}
+body.desk .vlist .fg{break-inside:avoid}
 </style>
 </head>
 <body>
 <header><button id="back" aria-label="Retour">‹</button><h1 id="logo">Let's Go English !</h1><div id="score">⭐ 0</div></header>
 <main id="app"></main>
 <footer>© 2026 HENRY Clément – Tous droits réservés.<br>Application propriété de HENRY Clément · <a id="lg">Mentions légales</a><div id="vw">Affichage : <a data-v="auto">Auto</a> · <a data-v="desk">🖥️ Ordinateur</a> · <a data-v="mob">📱 Mobile</a></div></footer>
-<nav id="tabs"><button data-t="home"><img src="icons/home.png" alt="" onerror="this.outerHTML='🏠'"><span>Accueil</span></button><button data-t="journey"><img src="icons/journey.png" alt="" onerror="this.outerHTML='🗺️'"><span>Aventure</span></button><button data-t="hero"><img src="icons/hero.png" alt="" onerror="this.outerHTML='🎒'"><span>Mon héros</span></button></nav>
+<nav id="tabs"><button data-t="home"><img src="icons/home.png" alt="" onerror="this.outerHTML='🏠'"><span>Accueil</span></button><button data-t="journey"><img src="icons/journey.png" alt="" onerror="this.outerHTML='🗺️'"><span>Aventure</span></button><button data-t="hero"><img src="icons/hero.png" alt="" onerror="this.outerHTML='🎒'"><span>Mon héros</span></button><button data-t="shop"><img src="icons/shop.png" alt="" onerror="this.outerHTML='🛍️'"><span>Boutique</span></button></nav>
 <script>
 const LV=["6ème","5ème","4ème","3ème"],CO=[["#44B2AF","#2a9d8f"],["#FFC857","#F4A300"],["#FF8A6B","#E4572E"],["#1E6FA8","#0D3B66"]];
 // Axe = [emoji, titre, leçon, à retenir (|), vocabulaire "en=fr;…", QCM [q,"a|b|c",index,traduction], trous [phrase,réponse(s),traduction], ordre [phrase,traduction]]
@@ -211,7 +215,7 @@ const lev=(a,b)=>{const m=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;
 const sim=(a,b)=>1-lev(a,b)/Math.max(a.length,b.length,1);
 let S={pts:0,stage:0,done:{},best:{},eq:{}};
 try{Object.assign(S,JSON.parse(localStorage.getItem("ec2")||"{}"))}catch(e){}
-S.eq=S.eq||{};
+S.eq=S.eq||{};S.own=S.own||{};S.jk=S.jk||{};S.fl=S.fl||{};
 const save=()=>{try{localStorage.setItem("ec2",JSON.stringify(S))}catch(e){}};
 const upd=()=>{$("#score").textContent="⭐ "+S.pts};
 var TM=null;
@@ -221,7 +225,7 @@ $("#back").onclick=()=>backFn&&backFn();$("#logo").onclick=home;
 // ===== Personnage (dessin hero.png si présent, sinon emoji) + bonus portés
 const HF=["hero.png","hero2.png","hero3.png"],HERO_OK=[1];
 function fb(e){if(e.dataset.alt){const a=e.dataset.alt;e.dataset.alt="";e.src=a}else e.outerHTML=e.dataset.fb}
-const worn=s=>ITEMS.find(i=>i[2]==s&&i[0]==S.eq[s]&&i[4]<=S.stage);
+const worn=s=>ITEMS.find(i=>i[2]==s&&i[0]==S.eq[s]&&(i[4]<=S.stage||S.own[i[0]]));
 const CL={hat:"hat",face:"fc",cloth:"cl",shoes:"sh"};
 // hi = numéro du personnage (0,1,2) ; bonus cherchés dans items/heroN/ puis items/ puis emoji
 function avatar(px,only,hi,bare){
@@ -252,10 +256,12 @@ function gen(l,i){
 }
 // ===== Un exercice
 function ask(c,e,cb){
-  let fin=false;const msg=H("","msg"),blank="<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>";
+  let fin=false;const msg=H("","msg"),jb=H("","chips"),blank="<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>";
   const end=(ok,ans)=>{if(fin)return;fin=true;msg.className="msg "+(ok?"ok":"ko");msg.textContent=ok?"✅ Bravo !":"❌ Réponse : "+ans;
     if(e.tr&&!c.querySelector(".tr"))c.insertBefore(H("🇫🇷 "+e.tr,"tr"),msg);
-    if(e.sp){const b=H("🔊 Écouter","say");b.onclick=()=>say(e.sp);c.append(b)}cb(ok)};
+    if(e.sp){const b=H("🔊 Écouter","say");b.onclick=()=>say(e.sp);c.append(b)}jb.remove();
+    if(!ok&&S.jk.r>0&&!e.rt){const rb=B("🔄 Seconde chance ("+S.jk.r+")","btn main alt",()=>{S.jk.r--;save();e.rt=1;c.innerHTML="";ask(c,e,cb)}),ct=B("Continuer ➜","btn main",()=>{rb.remove();ct.remove();cb(false)});c.append(rb,ct);return}
+    cb(ok)};
   if(e.t=="q"){
     c.append(H(e.q.replace("___",blank),"q"));if(e.tr)c.append(H("🇫🇷 "+e.tr,"tr"));
     e.o.forEach((t,i)=>{const b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=()=>{if(fin)return;b.classList.add(i==e.a?"ok":"ko");c.querySelectorAll(".opt")[e.a].classList.add("ok");end(i==e.a,e.o[e.a])};c.append(b)});
@@ -287,7 +293,9 @@ function ask(c,e,cb){
     const g=document.createElement("button");g.className="btn main";g.textContent="Valider";
     g.onclick=()=>{if(fin)return;end(nm([...z.children].map(x=>x.textContent).join(" "))==nm(e.a),e.a)};c.append(z,p,g);
   }
-  c.append(msg);
+  if(e.t=="q"&&S.jk.f>0)jb.append(B("🎯 50/50 ×"+S.jk.f,"chip",()=>{if(fin||S.jk.f<1)return;S.jk.f--;save();const bs=[...c.querySelectorAll(".opt")],w=sh(bs.map((_,i)=>i).filter(i=>i!=e.a));w.slice(0,Math.min(2,w.length-1)).forEach(i=>{bs[i].style.display="none"});jb.innerHTML=""}));
+  if((e.t=="f"||e.t=="d"||e.t=="o")&&S.jk.h>0)jb.append(B("💡 Indice ×"+S.jk.h,"chip",()=>{if(fin||S.jk.h<1)return;S.jk.h--;save();const a=e.a.split("|")[0],w=a.split(" ");jb.innerHTML="";jb.append(H(w.length>1?"💡 Premier mot : <b>"+w[0]+"</b> · "+w.length+" mots":"💡 Commence par « <b>"+a[0]+"</b> » · "+a.length+" lettres","tr"))}));
+  c.append(msg,jb);
 }
 // ===== Une série
 function series(box,list,fin){
@@ -311,7 +319,7 @@ function home(){
   LV.forEach((l,k)=>{const n=Object.keys(S.done).filter(x=>x.startsWith(k+"-")).length,b=H(`${l}<small>${n} / ${D[k].length} thèmes réussis</small>`,"btn lv");b.style.setProperty("--c",CO[k][0]);b.style.setProperty("--c2",CO[k][1]);b.onclick=()=>level(k);g.append(b)});
   app.append(g);
   app.append(h2("🧰 Outils et jeux"));const g2=H("","grid");
-  [["📖","Mon dico","Vocabulaire, verbes, conjugaison",dico,2],["🎮","Petits jeux","Pendu, memory, étiquettes…",games,1]].forEach(([e,n,d,f,k])=>{const b=H(`${e} ${n}<small>${d}</small>`,"btn lv");b.style.setProperty("--c",CO[k][0]);b.style.setProperty("--c2",CO[k][1]);b.style.fontSize="1.25rem";b.onclick=f;g2.append(b)});app.append(g2);
+  [["📖","Mon dico","Vocabulaire, verbes, conjugaison",dico,2],["🎮","Petits jeux","Pendu, memory, étiquettes…",games,1],["🌍","Flags of the world","Débloque les drapeaux du monde",flags,0]].forEach(([e,n,d,f,k])=>{const b=H(`${e} ${n}<small>${d}</small>`,"btn lv");b.style.setProperty("--c",CO[k][0]);b.style.setProperty("--c2",CO[k][1]);b.style.fontSize="1.25rem";b.onclick=f;g2.append(b)});app.append(g2);
   if(HAS_TTS||HAS_SR){const o=H(`<b>🎤 Exercices d'oral</b><p class="tr">Dictées audio et exercices où tu parles (micro). Tu peux les désactiver, par exemple en classe.</p>`,"card");
     o.append(B(S.oral===false?"Activer l'oral":"Désactiver l'oral","btn main alt",()=>{S.oral=(S.oral===false);save();home()}));app.append(o)}
 }
@@ -370,10 +378,10 @@ function heroPage(){
     av.forEach(i=>{const on=(S.hero||0)==i,b=document.createElement("button");b.className="it"+(on?" on":"");b.innerHTML=avatar(56,null,i,true)+`<small>Personnage ${i+1}</small>`;b.onclick=()=>{S.hero=i;S.hc=1;save();heroPage()};g.append(b)});c.append(g);app.append(c)}
   SLOTS.forEach(([s,t])=>{
     const c=H(`<h3>${t}</h3>`,"card"),g=H("","items");
-    ITEMS.filter(i=>i[2]==s).forEach(i=>{const lock=i[4]>S.stage,on=S.eq[s]==i[0]&&!lock,b=document.createElement("button");
+    ITEMS.filter(i=>i[2]==s).forEach(i=>{const lock=i[4]>S.stage&&!S.own[i[0]],on=S.eq[s]==i[0]&&!lock,b=document.createElement("button");
       b.className="it"+(on?" on":"")+(lock?" lock":"");
-      b.innerHTML=(lock?"🔒":s=="aura"?`<i style="background:${i[1]}"></i>`:avatar(40,i))+`<small>${lock?"Étape "+i[4]:i[3]}</small>`;
-      if(!lock)b.onclick=()=>{S.eq[s]=on?null:i[0];save();heroPage()};g.append(b)});
+      b.innerHTML=(lock?"🔒":s=="aura"?`<i style="background:${i[1]}"></i>`:avatar(40,i))+`<small>${lock?"Étape "+i[4]+" ou 🛍️":i[3]}</small>`;
+      b.onclick=lock?()=>shop():()=>{S.eq[s]=on?null:i[0];save();heroPage()};g.append(b)});
     c.append(g);app.append(c)});
   window.scrollTo(0,y);
 }
@@ -415,7 +423,7 @@ const CJ=[
 ["💬 Le discours rapporté",["Direct","Rapporté (passé)","Exemple"],[["am / is / are","was / were","« I am tired » → He said he was tired."],["présent simple","prétérit","« I like it » → She said she liked it."],["will / can","would / could","« I will come » → He said he would come."],["question","if / why + sujet + verbe","« Do you like it ? » → She asked if I liked it."]],"On « recule » d'un temps quand le verbe d'introduction est au passé."]];
 const pairs=s=>s.split(";").map(x=>x.split("="));
 let gt=-1;
-const gp=()=>gt<0?[...TH.flatMap(t=>pairs(t[2])),...D.flat().flatMap(a=>pairs(a[4]))]:pairs(TH[gt][2]);
+const gp=()=>gt<0?[...TH.flatMap(t=>pairs(t[2]).map(p=>[...p,t[0]+" "+t[1]])),...D.flat().flatMap(a=>pairs(a[4]).map(p=>[...p,a[0]+" "+a[1]]))]:pairs(TH[gt][2]).map(p=>[...p,TH[gt][0]+" "+TH[gt][1]]);
 const addPts=n=>{S.pts+=n;save();upd()};
 function dico(){
   nav(home,"home");app.append(h2("📖 Mon dico"));
@@ -459,13 +467,14 @@ function games(){
 const uniq=n=>{const seen=new Set(),P=[];sh(gp()).forEach(p=>{if(P.length<n&&!seen.has(p[0])&&!seen.has(p[1])&&p[0].length<=14&&p[1].length<=22){seen.add(p[0]);seen.add(p[1]);P.push(p)}});return P};
 function pendu(){
   nav(games,"home");
-  const P=gp().filter(([e])=>/^[a-z]+$/i.test(e)&&e.length>=3&&e.length<=12),[en,fr]=P[R(P.length)],w=en.toLowerCase(),found=new Set(),M=7;let bad=0,over=false;
+  const P=gp().filter(([e])=>/^[a-z]+$/i.test(e)&&e.length>=3&&e.length<=12),[en,fr,cat]=P[R(P.length)],w=en.toLowerCase(),found=new Set(),M=7;let bad=0,over=false;
   const box=H(""),hang=H(""),wd=H(""),kb=H("","kb"),msg=H("","msg");
-  app.append(box);box.append(H(`<b>Le pendu</b><small class="tr">🇫🇷 Indice : ${fr}</small>`),hang,wd,kb,msg);
+  const hintBox=H("","tr");app.append(box);box.append(H("<b>Le pendu</b>"),hintBox,hang,wd,kb,msg);
+  if(gt>=0)hintBox.textContent="📂 Thème choisi : "+cat;else hintBox.append(B("💡 Indice : la catégorie du mot (5 ⭐)","chip",()=>buyHint(5,()=>{hintBox.textContent="📂 Catégorie : "+cat})));
   const parts=['<line x1="10" y1="110" x2="70" y2="110"/>','<line x1="30" y1="110" x2="30" y2="10"/>','<line x1="30" y1="10" x2="85" y2="10"/><line x1="85" y1="10" x2="85" y2="24"/>','<circle cx="85" cy="32" r="8"/>','<line x1="85" y1="40" x2="85" y2="75"/>','<line x1="68" y1="55" x2="102" y2="55"/>','<line x1="85" y1="75" x2="72" y2="98"/><line x1="85" y1="75" x2="98" y2="98"/>'];
   const draw=()=>{hang.innerHTML=`<svg viewBox="0 0 120 120" width="150" height="150" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" style="display:block;margin:auto">${parts.slice(0,bad).join("")}</svg>`;
     wd.innerHTML=`<div style="text-align:center;font-size:2rem;letter-spacing:.3em;font-weight:900">${[...w].map(l=>found.has(l)||over?l:"_").join(" ")}</div><p class="tr" style="text-align:center">${M-bad} erreur(s) possible(s)</p>`};
-  const end=win=>{msg.className="msg "+(win?"ok":"ko");msg.textContent=win?"🎉 Bravo ! +10 points":"💀 Perdu ! Le mot était : "+w;msg.append(document.createElement("br"),B("🔊 Écouter","say",()=>say(w)));box.append(B("Mot suivant ➜","btn main",pendu))};
+  const end=win=>{msg.className="msg "+(win?"ok":"ko");msg.textContent=win?"🎉 Bravo ! "+w+" = "+fr+" · +10 points":"💀 Perdu ! Le mot était : "+w+" ("+fr+")";msg.append(document.createElement("br"),B("🔊 Écouter","say",()=>say(w)));box.append(B("Mot suivant ➜","btn main",pendu))};
   "abcdefghijklmnopqrstuvwxyz".split("").forEach(l=>{const b=B(l.toUpperCase(),"opt kbk",()=>{if(over||b.disabled)return;b.disabled=true;
     if(w.includes(l)){found.add(l);b.classList.add("ok")}else{bad++;b.classList.add("ko")}
     if([...w].every(x=>found.has(x))){over=true;addPts(10);end(true)}else if(bad>=M){over=true;end(false)}draw()});kb.append(b)});
@@ -504,11 +513,12 @@ function memory(){
 }
 function anagr(){
   nav(games,"home");
-  const P=gp().filter(([e])=>/^[a-z]+$/i.test(e)&&e.length>=4&&e.length<=10),[en,fr]=P[R(P.length)],w=en.toLowerCase();let L=sh([...w]);if(L.join("")==w)L=sh(L);
+  const P=gp().filter(([e])=>/^[a-z]+$/i.test(e)&&e.length>=4&&e.length<=10),[en,fr,cat]=P[R(P.length)],w=en.toLowerCase();let L=sh([...w]);if(L.join("")==w)L=sh(L);
   const box=H(""),zone=H("","chips zone"),pool=H("","chips"),msg=H("","msg");let done=false;
-  app.append(box);box.append(H(`<b>Remets les lettres dans l'ordre</b><small class="tr">🇫🇷 ${fr}</small>`),zone,pool,msg);
+  const hintBox=H("","tr");app.append(box);box.append(H("<b>Remets les lettres dans l'ordre</b>"),hintBox,zone,pool,msg);
+  if(gt>=0)hintBox.textContent="📂 Thème choisi : "+cat;else hintBox.append(B("💡 Indice : la catégorie du mot (3 ⭐)","chip",()=>buyHint(3,()=>{hintBox.textContent="📂 Catégorie : "+cat})));
   const chk=()=>{if(zone.children.length!=w.length){msg.textContent="";return}
-    if([...zone.children].map(x=>x.textContent).join("").toLowerCase()==w){done=true;addPts(5);msg.className="msg ok";msg.textContent="🎉 "+w+" ! +5 points";msg.append(document.createElement("br"),B("🔊 Écouter","say",()=>say(w)));box.append(B("Mot suivant ➜","btn main",anagr))}
+    if([...zone.children].map(x=>x.textContent).join("").toLowerCase()==w){done=true;addPts(5);msg.className="msg ok";msg.textContent="🎉 "+w+" = "+fr+" ! +5 points";msg.append(document.createElement("br"),B("🔊 Écouter","say",()=>say(w)));box.append(B("Mot suivant ➜","btn main",anagr))}
     else{msg.className="msg ko";msg.textContent="Pas tout à fait… retire des lettres et réessaie."}};
   L.forEach(l=>{const c=B(l.toUpperCase(),"chip",()=>{if(done)return;(c.parentNode==pool?zone:pool).append(c);chk()});pool.append(c)});
 }
@@ -522,6 +532,54 @@ function chrono(){
   hud();next();
   TM=setInterval(()=>{t--;hud();if(t<=0){clearInterval(TM);const p=score*2;addPts(p);box.innerHTML="";box.append(H(`<div class="em">⚡</div><h3>${score} bonnes réponses</h3><p>+${p} points</p>`,"card big"),B("Rejouer ➜","btn main",chrono),B("Retour aux jeux","btn main alt",games))}},1000);
 }
+const buyHint=(p,fn)=>{if(S.pts<p){toast("Il te manque "+(p-S.pts)+" ⭐ pour cet indice. Fais des exercices !");return}S.pts-=p;save();upd();fn()};
+// ===== Flags of the world : un drapeau = 30 ⭐ (code ISO | anglais | français)
+const FLAGS="af|Afghanistan|Afghanistan;al|Albania|Albanie;dz|Algeria|Algérie;ad|Andorra|Andorre;ao|Angola|Angola;ag|Antigua and Barbuda|Antigua-et-Barbuda;ar|Argentina|Argentine;am|Armenia|Arménie;au|Australia|Australie;at|Austria|Autriche;az|Azerbaijan|Azerbaïdjan;bs|Bahamas|Bahamas;bh|Bahrain|Bahreïn;bd|Bangladesh|Bangladesh;bb|Barbados|Barbade;by|Belarus|Biélorussie;be|Belgium|Belgique;bz|Belize|Belize;bj|Benin|Bénin;bt|Bhutan|Bhoutan;bo|Bolivia|Bolivie;ba|Bosnia and Herzegovina|Bosnie-Herzégovine;bw|Botswana|Botswana;br|Brazil|Brésil;bn|Brunei|Brunei;bg|Bulgaria|Bulgarie;bf|Burkina Faso|Burkina Faso;bi|Burundi|Burundi;kh|Cambodia|Cambodge;cm|Cameroon|Cameroun;ca|Canada|Canada;cv|Cape Verde|Cap-Vert;cf|Central African Republic|République centrafricaine;td|Chad|Tchad;cl|Chile|Chili;cn|China|Chine;co|Colombia|Colombie;km|Comoros|Comores;cg|Congo|Congo;cd|DR Congo|République démocratique du Congo;cr|Costa Rica|Costa Rica;hr|Croatia|Croatie;cu|Cuba|Cuba;cy|Cyprus|Chypre;cz|Czech Republic|République tchèque;dk|Denmark|Danemark;dj|Djibouti|Djibouti;dm|Dominica|Dominique;do|Dominican Republic|République dominicaine;tl|East Timor|Timor oriental;ec|Ecuador|Équateur;eg|Egypt|Égypte;sv|El Salvador|Salvador;gq|Equatorial Guinea|Guinée équatoriale;er|Eritrea|Érythrée;ee|Estonia|Estonie;sz|Eswatini|Eswatini;et|Ethiopia|Éthiopie;fj|Fiji|Fidji;fi|Finland|Finlande;fr|France|France;ga|Gabon|Gabon;gm|Gambia|Gambie;ge|Georgia|Géorgie;de|Germany|Allemagne;gh|Ghana|Ghana;gr|Greece|Grèce;gd|Grenada|Grenade;gt|Guatemala|Guatemala;gn|Guinea|Guinée;gw|Guinea-Bissau|Guinée-Bissau;gy|Guyana|Guyana;ht|Haiti|Haïti;hn|Honduras|Honduras;hu|Hungary|Hongrie;is|Iceland|Islande;in|India|Inde;id|Indonesia|Indonésie;ir|Iran|Iran;iq|Iraq|Irak;ie|Ireland|Irlande;il|Israel|Israël;it|Italy|Italie;ci|Ivory Coast|Côte d'Ivoire;jm|Jamaica|Jamaïque;jp|Japan|Japon;jo|Jordan|Jordanie;kz|Kazakhstan|Kazakhstan;ke|Kenya|Kenya;ki|Kiribati|Kiribati;kw|Kuwait|Koweït;kg|Kyrgyzstan|Kirghizistan;la|Laos|Laos;lv|Latvia|Lettonie;lb|Lebanon|Liban;ls|Lesotho|Lesotho;lr|Liberia|Libéria;ly|Libya|Libye;li|Liechtenstein|Liechtenstein;lt|Lithuania|Lituanie;lu|Luxembourg|Luxembourg;mg|Madagascar|Madagascar;mw|Malawi|Malawi;my|Malaysia|Malaisie;mv|Maldives|Maldives;ml|Mali|Mali;mt|Malta|Malte;mh|Marshall Islands|Îles Marshall;mr|Mauritania|Mauritanie;mu|Mauritius|Maurice;mx|Mexico|Mexique;fm|Micronesia|Micronésie;md|Moldova|Moldavie;mc|Monaco|Monaco;mn|Mongolia|Mongolie;me|Montenegro|Monténégro;ma|Morocco|Maroc;mz|Mozambique|Mozambique;mm|Myanmar|Birmanie;na|Namibia|Namibie;nr|Nauru|Nauru;np|Nepal|Népal;nl|Netherlands|Pays-Bas;nz|New Zealand|Nouvelle-Zélande;ni|Nicaragua|Nicaragua;ne|Niger|Niger;ng|Nigeria|Nigeria;kp|North Korea|Corée du Nord;mk|North Macedonia|Macédoine du Nord;no|Norway|Norvège;om|Oman|Oman;pk|Pakistan|Pakistan;pw|Palau|Palaos;ps|Palestine|Palestine;pa|Panama|Panama;pg|Papua New Guinea|Papouasie-Nouvelle-Guinée;py|Paraguay|Paraguay;pe|Peru|Pérou;ph|Philippines|Philippines;pl|Poland|Pologne;pt|Portugal|Portugal;qa|Qatar|Qatar;ro|Romania|Roumanie;ru|Russia|Russie;rw|Rwanda|Rwanda;kn|Saint Kitts and Nevis|Saint-Christophe-et-Niévès;lc|Saint Lucia|Sainte-Lucie;vc|Saint Vincent and the Grenadines|Saint-Vincent-et-les-Grenadines;ws|Samoa|Samoa;sm|San Marino|Saint-Marin;st|Sao Tome and Principe|Sao Tomé-et-Principe;sa|Saudi Arabia|Arabie saoudite;sn|Senegal|Sénégal;rs|Serbia|Serbie;sc|Seychelles|Seychelles;sl|Sierra Leone|Sierra Leone;sg|Singapore|Singapour;sk|Slovakia|Slovaquie;si|Slovenia|Slovénie;sb|Solomon Islands|Îles Salomon;so|Somalia|Somalie;za|South Africa|Afrique du Sud;kr|South Korea|Corée du Sud;ss|South Sudan|Soudan du Sud;es|Spain|Espagne;lk|Sri Lanka|Sri Lanka;sd|Sudan|Soudan;sr|Suriname|Suriname;se|Sweden|Suède;ch|Switzerland|Suisse;sy|Syria|Syrie;tj|Tajikistan|Tadjikistan;tz|Tanzania|Tanzanie;th|Thailand|Thaïlande;tg|Togo|Togo;to|Tonga|Tonga;tt|Trinidad and Tobago|Trinité-et-Tobago;tn|Tunisia|Tunisie;tr|Turkey|Turquie;tm|Turkmenistan|Turkménistan;tv|Tuvalu|Tuvalu;ug|Uganda|Ouganda;ua|Ukraine|Ukraine;ae|United Arab Emirates|Émirats arabes unis;gb|United Kingdom|Royaume-Uni;us|United States|États-Unis;uy|Uruguay|Uruguay;uz|Uzbekistan|Ouzbékistan;vu|Vanuatu|Vanuatu;va|Vatican City|Vatican;ve|Venezuela|Venezuela;vn|Vietnam|Viêt Nam;ye|Yemen|Yémen;zm|Zambia|Zambie;zw|Zimbabwe|Zimbabwe";
+const FP=30;
+function flags(){
+  nav(()=>shop(),"shop");
+  const rows=FLAGS.split(";").map(x=>x.split("|")),ac=s=>nm(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  let mode=0;
+  const top=H("","card big"),seg=H(`<button class="on">Tous</button><button>Débloqués</button><button>À débloquer</button>`,"seg"),list=H("","vlist"),f=document.createElement("input");
+  f.type="text";f.placeholder="Chercher un pays (ex. Spain, Espagne)…";
+  const n=()=>rows.filter(r=>S.fl[r[0]]).length;
+  const hdr=()=>{top.innerHTML=`<div class="em">🌍</div><h3>Flags of the world</h3><p>Tu as <b>${S.pts} ⭐</b> · <b>${n()} / ${rows.length}</b> drapeaux débloqués<br><small>${FP} ⭐ par drapeau · touche 🔊 pour entendre le nom en anglais</small></p>`};
+  const draw=()=>{
+    list.innerHTML="";const q=ac(f.value||"");
+    rows.filter(r=>(!q||ac(r[1]+" "+r[2]).includes(q))&&(mode==0||(mode==1)==!!S.fl[r[0]])).forEach(([c,en,fr])=>{
+      const own=!!S.fl[c],r=H("","fg");
+      r.innerHTML=(own?`<img class="fl" loading="lazy" src="flags/${c}.svg" alt="${en}" onerror="this.outerHTML='<div class=fl>🏳️</div>'">`:`<div class="fl">🔒</div>`)+`<div class="nm"><b>${en}</b><small>${fr}</small></div>`;
+      r.append(B(own?"🔊":"🔓 "+FP+" ⭐","chip",()=>{
+        if(own){say(en);return}
+        if(S.pts<FP){toast("Il te manque "+(FP-S.pts)+" ⭐ pour ce drapeau. Continue les exercices !");return}
+        S.pts-=FP;S.fl[c]=1;save();upd();hdr();draw()}));
+      list.append(r)})};
+  seg.querySelectorAll("button").forEach((b,k)=>{b.onclick=()=>{mode=k;seg.querySelectorAll("button").forEach((x,j)=>x.classList.toggle("on",j==k));draw()}});
+  f.oninput=draw;hdr();draw();
+  app.append(top,seg,f,list);
+}
+// ===== Boutique : les étoiles s'échangent contre des jokers et des bonus
+const PR=i=>i[4]*60;
+const JK=[["f","🎯","50/50","Enlève des mauvaises réponses d'un QCM",30],["h","💡","Indice","Donne la première lettre (ou le premier mot)",20],["r","🔄","Seconde chance","Permet de retenter une question ratée",40]];
+function buy(p,n,fn){
+  if(S.pts<p){toast("Il te manque "+(p-S.pts)+" ⭐ pour « "+n+" ». Continue les exercices !");return}
+  if(!confirm("Acheter « "+n+" » pour "+p+" ⭐ ?"))return;
+  S.pts-=p;fn();save();upd();shop();
+}
+function shop(){
+  nav(null,"shop");
+  app.append(H(`<div class="em">🛍️</div><h3>La boutique</h3><p>Tu as <b>${S.pts} ⭐</b>.<br>Gagne des étoiles en faisant des exercices et en jouant, puis dépense-les ici !</p>`,"card big"));
+  app.append(h2("🎒 Jokers"));
+  JK.forEach(([k,e,n,d,p])=>{const b=H(`<span class="t" style="background:#FFC85755">${e}</span><span><b>${n}</b><small>${d}</small><small>Tu en as : ${S.jk[k]||0} · Prix : ${p} ⭐</small></span>`,"btn axe");b.onclick=()=>buy(p,n,()=>{S.jk[k]=(S.jk[k]||0)+1});app.append(b)});
+  app.append(h2("🌍 Pour le plaisir"));
+  const fb2=H(`<span class="t" style="background:#44B2AF40">🌍</span><span><b>Flags of the world</b><small>Débloque les drapeaux de tous les pays · ${FP} ⭐ chacun</small><small>${Object.keys(S.fl).length} / 195 débloqués</small></span>`,"btn axe");fb2.onclick=()=>flags();app.append(fb2);
+  app.append(h2("🎩 Bonus pour ton héros"));
+  const lk=ITEMS.filter(i=>i[4]>S.stage&&!S.own[i[0]]);
+  if(!lk.length){app.append(H("Tu as débloqué tous les bonus ! 🎉","card"));return}
+  const g=H("","items");
+  lk.forEach(i=>{const b=document.createElement("button");b.className="it";b.innerHTML=(i[2]=="aura"?`<i style="background:${i[1]}"></i>`:avatar(40,i))+`<small>${i[3]}<br>${PR(i)} ⭐</small>`;b.onclick=()=>buy(PR(i),i[3],()=>{S.own[i[0]]=1;S.eq[i[2]]=i[0]});g.append(b)});
+  app.append(H(`<small class="tr">Ces bonus se débloquent aussi gratuitement en avançant sur la route. Touche-en un pour l'acheter tout de suite.</small>`),g);
+}
 // ===== Mentions légales
 function legal(){
   nav(()=>home(),"home");
@@ -530,11 +588,12 @@ function legal(){
 <p><b>Propriété intellectuelle :</b> l'application « Let's Go English ! » (nom, code, textes, exercices, illustrations et organisation du contenu) est la propriété exclusive de HENRY Clément. Toute reproduction, représentation, modification, adaptation ou diffusion, totale ou partielle, sans autorisation écrite préalable de l'auteur est interdite.</p>
 <p><b>Données personnelles :</b> l'application ne demande aucune donnée personnelle (nom, e-mail…) et n'utilise ni cookie ni publicité. Elle mesure seulement son audience de façon anonyme (nombre de visites, pays, type d'appareil) avec le service GoatCounter, sans cookie et sans suivi individuel des utilisateurs. Les points, la progression et les bonus du héros sont enregistrés uniquement sur l'appareil de l'utilisateur ; ils disparaissent si les données du navigateur sont effacées. Les exercices de prononciation utilisent la reconnaissance vocale du navigateur : selon l'appareil, le son peut être traité par le fournisseur du navigateur (Google, Apple…). L'application elle-même n'enregistre ni ne conserve aucune voix. Ces exercices peuvent être désactivés depuis l'accueil.</p>
 <p><b>Contenu pédagogique :</b> les exercices s'appuient sur le programme d'anglais des classes de collège.</p>
+<p><b>Crédits :</b> les drapeaux proviennent du projet libre « flag-icons » (licence MIT).</p>
 ${LEGAL_CONTACT?`<p><b>Contact :</b> ${LEGAL_CONTACT}</p>`:""}
 <p class="tr">© 2026 HENRY Clément – Tous droits réservés.</p>`,"card"));
 }
-$("#lg").onclick=legal;
-document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>({home:()=>home(),journey:()=>journey(),hero:heroPage})[b.dataset.t]());
+$("#lg").onclick=legal;$("#score").onclick=()=>shop();$("#score").style.cursor="pointer";
+document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>({home:()=>home(),journey:()=>journey(),hero:heroPage,shop:()=>shop()})[b.dataset.t]());
 const applyView=()=>{try{const d=S.view=="desk"||(S.view!="mob"&&window.matchMedia("(min-width:900px)").matches);document.body.classList.toggle("desk",d);document.querySelectorAll("#vw a").forEach(a=>a.classList.toggle("on",a.dataset.v==(S.view||"auto")))}catch(e){}};
 document.querySelectorAll("#vw a").forEach(a=>a.onclick=()=>{S.view=a.dataset.v;save();applyView()});
 try{addEventListener("resize",applyView)}catch(e){}
